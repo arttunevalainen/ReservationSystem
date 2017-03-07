@@ -4,15 +4,14 @@
 <title>KEBAB</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<link rel="stylesheet" th:href="@{/css/testi.css}"
-	href="../../css/testi.css" />
+<link rel="stylesheet" th:href="@{/css/styles.css}"/>
 
 </head>
 <body>
-
-    <h2>
-        <span th:text="'TÄSSÄ TEILLE: ' + ${message}"></span>
-    </h2>
-		
+    <h1>Welcome</h1>
+    
+    <span th:text="'Terve' + ${userName} + '!'"></span>
+    
+    
 </body>
 </html>
