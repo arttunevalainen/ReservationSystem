@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("reservation")
 public class ReservationController {
 
     /**
@@ -13,7 +14,7 @@ public class ReservationController {
      * @param model
      * @return 
      */
-    @RequestMapping("/reservation")
+    @RequestMapping("")
     public String index(Model model) {
         //TODO: http parametri, id kohteelle
         //Tänne esim varauksen yleiset tiedot, joku kuva siitä ehkä, 
