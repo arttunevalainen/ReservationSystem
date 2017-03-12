@@ -1,39 +1,39 @@
 WWW-Ohjelmointi harjoitustyö tietokanta:
 
 
-CREATE TABLE kayttajat (
-kayttajatunnus VARCHAR(40),
-salasana VARCHAR(40) NOT NULL,
-nimi VARCHAR(50) NOT NULL,
-rooli VARCHAR(10) NOT NULL,
-PRIMARY KEY (kayttajatunnus));
+CREATE TABLE Users (
+Id SERIAL,
+Username VARCHAR(40),
+Password VARCHAR(40) NOT NULL,
+Name VARCHAR(50) NOT NULL,
+Role VARCHAR(10) NOT NULL,
+PRIMARY KEY (Id));
 
 
-CREATE TABLE varattava (
-varattava_nimi VARCHAR(40),
-tiedot VARCHAR(400),
-omistaja_nimi INT NOT NULL,
-PRIMARY KEY (varattava_nimi),
-FOREIGN KEY (omistaja_nimi) REFERENCES kayttaja(kayttajatunnus),
-UNIQUE (nimi));
+CREATE TABLE Reservable (
+Id SERIAL,
+Name VARCHAR(40),
+Info VARCHAR(400),
+OwnerId INT NOT NULL,
+PRIMARY KEY (Id),
+FOREIGN KEY (OwnerId) REFERENCES Users(Id));
 
 
-CREATE TABLE varaukset (
-varaus_id SERIAL,
-varattava_nimi VARCHAR(40) NOT NULL,
-varaaja_nimi INT NOT NULL,
-varaus_pvm DATE NOT NULL,
-alkaa_aika INT NOT NULL,
-loppuu_aika INT NOT NULL,
-PRIMARY KEY (varaus_id),
-FOREIGN KEY (varaaja_nimi) REFERENCES kayttajat(kayttajatunnus),
-FOREIGN KEY (varattava_nimi) REFERENCES varattava(nimi));
+CREATE TABLE Reservations (
+Id SERIAL,
+ReservableId INT NOT NULL,
+ReserverId INT NOT NULL,
+StartTime TIMESTAMP NOT NULL,
+EndTime TIMESTAMP NOT NULL,
+PRIMARY KEY (Id),
+FOREIGN KEY (ReserverId) REFERENCES Users(Id),
+FOREIGN KEY (ReservableId) REFERENCES Reservable(Id));
 
 
-CREATE TABLE voivarata (
-id SERIAL,
-varaaja_nimi INT NOT NULL,
-varattava_nimi INT NOT NULL,
-PRIMARY KEY (id),
-FOREIGN KEY (varaaja_nimi) REFERENCES kayttajat(kayttajatunnus),
-FOREIGN KEY (varattava_nimi) REFERENCES varattava(varattava_nimi));
+CREATE TABLE Privileges (
+Id SERIAL,
+UserId INT NOT NULL,
+ReservableId INT NOT NULL,
+PRIMARY KEY (Id),
+FOREIGN KEY (UserId) REFERENCES Users(Id),
+FOREIGN KEY (ReservableId) REFERENCES Reservable(Id));
