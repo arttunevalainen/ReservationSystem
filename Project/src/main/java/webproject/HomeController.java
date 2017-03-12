@@ -17,7 +17,9 @@ public class HomeController {
     public String index(Model model) {
         
         model.addAttribute("userName", "Pekka");
-
+        model.addAttribute("title", "Reservations");
+        model.addAttribute("role", "admin");
+        model.addAttribute("userId", "3");
         return "home";
     }
     

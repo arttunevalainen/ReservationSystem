@@ -4,8 +4,14 @@
         "th:text": {
             "context": "span"
         },
+        "th:replace": {
+            "context": "div"
+        },
         "th:href": {
             "context": "link"
+        },
+        "th:fragment": {
+            "context": "div"
         }
     }
 }

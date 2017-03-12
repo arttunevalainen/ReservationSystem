@@ -3,15 +3,54 @@
 <head>
 <title>KEBAB</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <link rel="stylesheet" th:href="@{/css/styles.css}"/>
 
 </head>
 <body>
-    <h1>Welcome</h1>
+    <div th:replace="fragments :: header (title=${title})"></div>
+    <div class='content'>
+        
+        <div class='reserved basic-container'>
+            <div class='basic-header'>Items reserved by you:</div>
+            <div class='reserved-item'>
+                
+            </div>
+            <div class='reserved-item'>
+                
+            </div>
+            <div class='reserved-item'>
+                
+            </div>
+        </div>
+
+        <div class='reservables basic-container'>
+            <div class='basic-header'>Items available for reservation</div>
+            <div class='reservable-item'>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Owner</th>
+                            <th>jotain</th>
+                            <th>muuta</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+<script>
     
-    <span th:text="'Terve' + ${userName} + '!'"></span>
-    
-    
+</script>
 </body>
 </html>

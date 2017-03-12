@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    </head>
+    <body>
+        <div th:fragment="header (title)" class='header'>
+            <h1 th:text="${title}"></h1>
+            <div class='navbar'>
+                <div class='nav-button' th:classappend="${title=='Home'} ? selected : ''">
+                    <span><a href='' >Home</a></span>
+                </div>
+                <div class='nav-button' th:classappend="${title=='Reservations'} ? selected : ''">
+                    <span><a href='/reservations'>Reservations</a></span>
+                </div>
+                <div class='nav-button' th:classappend="${title=='Settings'} ? selected : ''">
+                    <span><a href='/settings'>Settings</a></span>
+                </div>
+                <div class='nav-button' th:classappend="${title=='New reservable'} ? selected : ''"
+                     th:if="${role == 'admin' || role == 'owner'}">
+                    <span><a href='/newreservable'>New reservable</a></span>
+                </div>
+                <div class='nav-button' th:classappend="${title=='Admin panel'} ? selected : ''"
+                     th:if="${role == 'admin'}">
+                    <span><a href='/adminpanel'>Admin panel</a></span>
+                </div>
+            </div>
+        </div>
+        <div th:fragment="footer" class='footer'>
+            todo
+        </div>
+    </body>
+</html>
