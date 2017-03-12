@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>KEBAB</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" th:href="@{/css/testi.css}"
+	href="../../css/testi.css" />
+
+</head>
+<body>
+
+    <div>
+        <form class="login" th:action="@{/login}" method="post">
+            <table>
+                <tr>
+                    <tr>
+                        <td>Nimi:</td>
+                    </tr>
+                    <td><input type="text" name = "username"/></td>
+                </tr>
+                <tr>
+                    <tr>
+                        <td>Salasana:</td>
+                    </tr>
+                    <td><input type="password" name = "password" /></td>
+                </tr>
+                <tr>
+                    <td id="submit"><button type="Submit">Kirjaudu</button></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+		
+</body>
+</html>
