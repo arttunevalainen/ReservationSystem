@@ -37,3 +37,12 @@ ReservableId INT NOT NULL,
 PRIMARY KEY (Id),
 FOREIGN KEY (UserId) REFERENCES Users(Id),
 FOREIGN KEY (ReservableId) REFERENCES Reservable(Id));
+
+
+//TESTIDATAAA
+INSERT INTO Users (Username, password, name, role) VALUES ('admin', 'admin', 'admin', 'admin');
+
+INSERT INTO Reservable(Name, info, ownerId) VALUES ('Paku', 'varaa paku', 1);
+
+INSERT INTO Reservations (reservableid, reserverid, starttime, endtime) VALUES (1, 1, '2017-04-01 09:00:00', '2017-04-01 12:00:00');
+
