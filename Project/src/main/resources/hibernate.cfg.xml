@@ -8,21 +8,23 @@
       org.hibernate.dialect.PostgreSQLDialect
    </property>
    <property name="hibernate.connection.driver_class">
-      com.mysql.jdbc.Driver VAIHDA POSTGRESs driver
+      org.postgresql.Driver
    </property>
 
    <property name="hibernate.connection.url">
-      jdbc:mysql://localhost
+      jdbc:postgresql://localhost:5433/ReservationTool
    </property>
    <property name="hibernate.connection.username">
-      root
+      postgres
    </property>
    <property name="hibernate.connection.password">
       dev
    </property>
 
    <!-- List of XML mapping files -->
-   <mapping resource="Employee.hbm.xml"/>
+   <mapping resource="User.hbm.xml"/>
+   <!-- <mapping resource="webproject/Models/Reservation.hbm.xml"/>
+   <mapping resource="webproject/Models/Reservable.hbm.xml"/> -->
 
 </session-factory>
 </hibernate-configuration>
