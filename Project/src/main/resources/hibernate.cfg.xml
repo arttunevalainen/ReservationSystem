@@ -23,8 +23,8 @@
 
    <!-- List of XML mapping files -->
    <mapping resource="User.hbm.xml"/>
-   <!-- <mapping resource="webproject/Models/Reservation.hbm.xml"/>
-   <mapping resource="webproject/Models/Reservable.hbm.xml"/> -->
+   <mapping resource="Reservation.hbm.xml"/>
+   <mapping resource="ReservationItem.hbm.xml"/>
 
 </session-factory>
 </hibernate-configuration>

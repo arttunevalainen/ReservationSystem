@@ -1,1 +1,6 @@
-Maven buildaamaan ja ajamaan samalla
+tiedon talletus kantaan
+reservation lista userilla ja revesrvablelle
+
+Salasanojen hashaus
+hibernate annotaatiot
+ajax etusivulle

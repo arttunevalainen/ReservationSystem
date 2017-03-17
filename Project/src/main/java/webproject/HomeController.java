@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import static webproject.Application.sessionFactory;
+import webproject.Models.*;
 
 
 @Controller
@@ -38,7 +38,7 @@ public class HomeController extends WebMvcConfigurerAdapter {
 
     @RequestMapping("/home")
     public String index(Model model, SecurityContextHolderAwareRequestWrapper request) {
-        //Session session = sessionFactory.openSession();
+        Session session = sessionFactory.openSession();
 
         String role = "";
         if(request.isUserInRole("USER")) {
@@ -49,8 +49,16 @@ public class HomeController extends WebMvcConfigurerAdapter {
         model.addAttribute("title", "Reservations");
         model.addAttribute("role", role);
         model.addAttribute("userId");
+        ReservationItem item = session.get(ReservationItem.class, 1);
+        model.addAttribute("reservationitem", item.getName());
+        model.addAttribute("ownername", item.getOwner().getName());
         
-
+        Reservation res = session.get(Reservation.class, 1);
+        System.out.println(res);
+        
+        model.addAttribute("reservation_reservable", res.getReservationItem().getName());
+        model.addAttribute("reservation_user", res.getReserver().getName());
+        
         /*session.beginTransaction();
         session.save(new User());
         //session.save( new User( 100, "Testi user", "passu", "Matti meikäläinen", "owner" ) );
