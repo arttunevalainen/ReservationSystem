@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import static webproject.Application.sessionFactory;
-import webproject.Models.User;
 
 
 @Controller
@@ -34,19 +33,22 @@ public class HomeController extends WebMvcConfigurerAdapter {
     @RequestMapping("/login")
     public String login() {
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
         return "login";
     }
 
     @RequestMapping("/home")
-    public String index(Model model) {
-        Session session = sessionFactory.openSession();
-        User us = (User) session.get(User.class, 1);
-        model.addAttribute("userName", us.getName());
+    public String index(Model model, SecurityContextHolderAwareRequestWrapper request) {
+        //Session session = sessionFactory.openSession();
+
+        String role = "";
+        if(request.isUserInRole("USER")) {
+            role = ("User");
+        }
+        
+        model.addAttribute("userName", request.getUserPrincipal().getName());
         model.addAttribute("title", "Reservations");
-        model.addAttribute("role", "admin");
-        model.addAttribute("userId", us.getId());
+        model.addAttribute("role", role);
+        model.addAttribute("userId");
         
 
         /*session.beginTransaction();
