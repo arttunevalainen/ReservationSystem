@@ -14,7 +14,10 @@
         <property name="info"/>
 		<one-to-one name="owner" class="webproject.Models.User"
 			cascade="save-update"></one-to-one>
-			
+		<set name="reservations" cascade="all">
+         <key column="reservableid"/>
+         <one-to-many class="Reservation"/>
+      </set>
 		
 		<!-- 
 		lista reservationeista

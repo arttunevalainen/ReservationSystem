@@ -6,7 +6,6 @@ import java.util.List;
 public class User{
     private int id;
     private String name;
-    //TODO substitute with Role object if theres time
     private String role;
     private String password;
     private String username;

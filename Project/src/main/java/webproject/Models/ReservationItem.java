@@ -4,13 +4,11 @@ import java.util.Set;
 
 
 public class ReservationItem{
-    private int id;
-    private String name;
-    private String info;
-    private User owner;
-    //TODO keksi hyvä tietorakenne ja poista vanhat setterit
-    private Set<Reservation> reservations;
-    
+    protected int id;
+    protected String name;
+    protected String info;
+    protected User owner;
+    protected Set<Reservation> reservations;
     
     public ReservationItem(){
         

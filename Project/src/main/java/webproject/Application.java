@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
-@SpringBootApplication
+@SpringBootApplication//(scanBasePackages={"webproject.models","webproject.dataaccess"})
 public class Application {
     public static SessionFactory sessionFactory;
     
@@ -24,10 +24,7 @@ public class Application {
             sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         }
         catch (Exception e) {
-            // The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
-            // so destroy it manually.
             StandardServiceRegistryBuilder.destroy( registry );
-            System.out.println(registry);
             e.printStackTrace();
             return;
         }

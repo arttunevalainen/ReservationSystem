@@ -19,6 +19,7 @@ public class Reservation{
         this.startTime = startTime;
         this.endTime = endTime;
     }
+    
 
     /**
      * @return the reservationItem
