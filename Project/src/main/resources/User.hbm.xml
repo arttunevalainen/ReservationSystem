@@ -15,7 +15,10 @@
 
         <property name="name"/>
         <property name="role"/>
-
+		<set name="reservations" cascade="all">
+			<key column="reserverid"/>
+			<one-to-many class="Reservation"/>
+		</set>
 
     </class>
 

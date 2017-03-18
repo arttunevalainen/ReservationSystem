@@ -18,16 +18,6 @@
          <key column="reservableid"/>
          <one-to-many class="Reservation"/>
       </set>
-		
-		<!-- 
-		lista reservationeista
-		<set name="stockDailyR" table="stock_daily_record"
-				inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="STOCK_ID" not-null="true" />
-            </key>
-            <one-to-many class="com.mkyong.stock.StockDailyRecord" />
-        </set> -->
     </class>
 
 </hibernate-mapping>

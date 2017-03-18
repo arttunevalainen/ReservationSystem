@@ -1,6 +1,7 @@
 
 package webproject.dataaccess;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 import webproject.Application;
@@ -24,6 +25,7 @@ public class UserRepository {
     public User get(int id){
         Session session = Application.sessionFactory.openSession();
         User item = session.get(User.class, 1);
+        Hibernate.initialize(item.getReservations());
         session.close();
         return item;
     }

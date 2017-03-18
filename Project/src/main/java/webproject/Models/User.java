@@ -1,6 +1,6 @@
 package webproject.Models;
 
-import java.util.List;
+import java.util.Set;
 
 
 public class User{
@@ -9,11 +9,12 @@ public class User{
     private String role;
     private String password;
     private String username;
-    private List<Reservation> reservations;
+    private Set<Reservation> reservations;
     
     public User(){
         
     }
+    
     public User(String username, String password, String name, String role){
         this.name = name;
         this.password = password;
@@ -78,20 +79,6 @@ public class User{
     }
 
     /**
-     * @return the reservations
-     */
-    public List<Reservation> getReservations() {
-        return reservations;
-    }
-
-    /**
-     * @param reservations the reservations to set
-     */
-    public void setReservations(List<Reservation> reservations) {
-        this.reservations = reservations;
-    }
-
-    /**
      * @return the id
      */
     public int getId() {
@@ -103,5 +90,19 @@ public class User{
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * @return the reservations
+     */
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
+
+    /**
+     * @param reservations the reservations to set
+     */
+    public void setReservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
     }
 }

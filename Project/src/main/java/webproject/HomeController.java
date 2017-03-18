@@ -55,6 +55,8 @@ public class HomeController extends WebMvcConfigurerAdapter {
             role = ("User");
         }
         
+        System.out.println(userRepository.get(1).getName());
+        
         model.addAttribute("userName", request.getUserPrincipal().getName());
         model.addAttribute("title", "Home");
         model.addAttribute("role", role);
@@ -65,15 +67,14 @@ public class HomeController extends WebMvcConfigurerAdapter {
         model.addAttribute("ownername", item.getOwner().getName());
         
         item.getReservations().stream()
-                            .forEach(x -> System.out.println("asd"));
-                              //.forEach(s -> System.out.println(s.getReserver().getName()));
+                              .forEach(s -> System.out.println(s.getReserver().getName()));
         
         Reservation res = reservationRepository.get(1);
         
         model.addAttribute("reservation_reservable", res.getReservationItem().getName());
         model.addAttribute("reservation_user", res.getReserver().getName());
         
-        userRepository.save(new User("uusi", "kayttaja", "jee", "user"));
+        //userRepository.save(new User("uusi", "kayttaja", "jee", "user"));
         
         return "home";
     }
