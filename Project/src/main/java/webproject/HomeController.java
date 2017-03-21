@@ -50,6 +50,7 @@ public class HomeController extends WebMvcConfigurerAdapter {
     @RequestMapping("/home")
     public String index(Model model, SecurityContextHolderAwareRequestWrapper request) {
 
+        //TÄÄ PITÄÄ KORJATA
         String role = "";
         if(request.isUserInRole("USER")) {
             role = ("User");
