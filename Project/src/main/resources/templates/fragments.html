@@ -8,8 +8,9 @@
             <h1 th:text="${title}"></h1>
             <div class='navbar'>
                 <div class='nav-button' th:classappend="${title=='Home'} ? selected : ''">
-                    <span><a href='' >Home</a></span>
+                    <span><a href='/home' >Home</a></span>
                 </div>
+                <!-- tätä ei välttämättä tarvii, jos laitetaan vaan kaikki etusivulle-->
                 <div class='nav-button' th:classappend="${title=='Reservations'} ? selected : ''">
                     <span><a href='/reservations'>Reservations</a></span>
                 </div>

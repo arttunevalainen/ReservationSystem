@@ -55,12 +55,16 @@ public class HomeController extends WebMvcConfigurerAdapter {
             role = ("User");
         }
         
-        System.out.println(userRepository.get(1).getName());
+        User a = userRepository.get(1);
+        a.getReservations().stream()
+                              .forEach(s -> System.out.println(s.getReserver().getName()));
+        
         
         model.addAttribute("userName", request.getUserPrincipal().getName());
         model.addAttribute("title", "Home");
         model.addAttribute("role", role);
-        model.addAttribute("userId");
+        //VAIHDA TÄÄ OIKEEKS
+        model.addAttribute("userId", 1);
         
         ReservationItem item = reservationItemRepository.get(1);
         model.addAttribute("reservationitem", item.getName());
