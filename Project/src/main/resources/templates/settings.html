@@ -7,10 +7,26 @@ and open the template in the editor.
 <html>
     <head>
         <title>Settings</title>
+        <link rel="stylesheet" th:href="@{/css/styles.css}"/>
     </head>
     <body>
         <div>
-            <p>Muutellaan tietoja tässä</p>
+            <form method="post" th:action="@{/settings}">
+                <table>
+                    <tr>
+                        <td>Name:<input type="text" value="NIMESI"/></td>
+                    </tr>
+                    <tr>
+                        <td>Password:<input type="text" value="SALASANASI"/></td>
+                    </tr>
+                    <tr>
+                        <td><button type="submit" value="Save" th:text="Save"></button></td>
+                    </tr>
+                </table>
+            </form>
+            <div>
+                Information saved.// TÄMÄ KUN TIEDOT TALLENNETTU
+            </div>
         </div>
     </body>
 </html>

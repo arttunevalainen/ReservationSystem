@@ -52,7 +52,8 @@ public class HomeController extends WebMvcConfigurerAdapter {
     @RequestMapping("/home")
     public String index(Model model) {
         
-        //Saadaan kaivettua kirjautunut. Tietokannasta pitäisi saada id sun muut vielä.
+        //Saadaan kaivettua kirjautunut. Tietokannasta pitäisi saada id sun muut vielä josta tehdä User olio??
+        //Tällä .getUsername() ja .getAuthorities() joka Collection oikeuksista. Voin tehä tän torstaina.
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails details = (UserDetails) auth.getPrincipal();
         
@@ -65,7 +66,6 @@ public class HomeController extends WebMvcConfigurerAdapter {
         model.addAttribute("userName", details.getUsername());
         model.addAttribute("title", "Home");
         model.addAttribute("role", details.getAuthorities());
-        //VAIHDA TÄÄ OIKEEKS
         model.addAttribute("userId", 1);
         
         ReservationItem item = reservationItemRepository.get(1);

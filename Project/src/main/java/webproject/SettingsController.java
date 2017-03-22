@@ -9,7 +9,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -19,8 +20,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SettingsController {
     
     
-    @RequestMapping("/settings")
+    @GetMapping("/settings")
     public String settings() {
+     
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails details = (UserDetails) auth.getPrincipal();
+        
         return "settings";
+    }
+    
+    //Palautetaan tietojen tallentamisen jälkeen home.
+    @PostMapping("/settings")
+    public String saved() {
+        
+        return "home";
     }
 }
