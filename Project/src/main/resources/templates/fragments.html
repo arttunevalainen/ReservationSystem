@@ -6,6 +6,9 @@
     <body>
         <div th:fragment="header (title)" class='header'>
             <h1 th:text="${title}"></h1>
+            <form action="/logout">
+                <input type="submit" value="logout"/>
+            </form>
             <div class='navbar'>
                 <div class='nav-button' th:classappend="${title=='Home'} ? selected : ''">
                     <span><a href='/home' >Home</a></span>

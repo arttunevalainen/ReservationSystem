@@ -51,9 +51,9 @@ public class HomeController extends WebMvcConfigurerAdapter {
     public String index(Model model, SecurityContextHolderAwareRequestWrapper request) {
 
         //TÄÄ PITÄÄ KORJATA
-        String role = "";
-        if(request.isUserInRole("USER")) {
-            role = ("User");
+        String role = "NOT FOUND";
+        if(request.isUserInRole("user")) {
+            role = "user";
         }
         
         User a = userRepository.get(1);
