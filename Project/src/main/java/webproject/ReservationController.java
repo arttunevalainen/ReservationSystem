@@ -26,12 +26,11 @@ public class ReservationController {
      */
     @RequestMapping("/{id}")
     public String index(Model model, @PathVariable String id) {
-        //Tänne esim varauksen yleiset tiedot, joku kuva siitä ehkä, 
-           // ja aikatauluun kaikki jo varatut ajankohdat
+        //Tänne esim varauksen yleiset tiedot, joku kuva siitä ehkä,
+        // ja aikatauluun kaikki jo varatut ajankohdat
         
         Reservation res = reservationRepository.get(Integer.parseInt(id));
         model.addAttribute("title", res.getReservationItem().getName() + " at " + res.getStartTime().toString());
         return "reservation";
     }
-    
 }

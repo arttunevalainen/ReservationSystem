@@ -2,6 +2,9 @@
 package webproject;
 
 import org.hibernate.Hibernate;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
-import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import webproject.Models.*;
 import webproject.dataaccess.ReservationItemRepository;
 import webproject.dataaccess.ReservationRepository;
@@ -48,22 +50,21 @@ public class HomeController extends WebMvcConfigurerAdapter {
     }
 
     @RequestMapping("/home")
-    public String index(Model model, SecurityContextHolderAwareRequestWrapper request) {
-
-        //TÄÄ PITÄÄ KORJATA
-        String role = "NOT FOUND";
-        if(request.isUserInRole("user")) {
-            role = "user";
-        }
+    public String index(Model model) {
+        
+        //Saadaan kaivettua kirjautunut. Tietokannasta pitäisi saada id sun muut vielä.
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails details = (UserDetails) auth.getPrincipal();
+        
         
         User a = userRepository.get(1);
         a.getReservations().stream()
                               .forEach(s -> System.out.println(s.getReserver().getName()));
         
         
-        model.addAttribute("userName", request.getUserPrincipal().getName());
+        model.addAttribute("userName", details.getUsername());
         model.addAttribute("title", "Home");
-        model.addAttribute("role", role);
+        model.addAttribute("role", details.getAuthorities());
         //VAIHDA TÄÄ OIKEEKS
         model.addAttribute("userId", 1);
         
