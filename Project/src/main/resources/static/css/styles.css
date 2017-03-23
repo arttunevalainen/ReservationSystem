@@ -42,6 +42,10 @@ body{
     background-color: #00cc00;
 }
 
+.header .logout{
+    float:right;
+}
+
 .basic-container{
     background-color: #b3ffb3;
     border-bottom-left-radius: 10px;

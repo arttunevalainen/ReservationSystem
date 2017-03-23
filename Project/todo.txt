@@ -1,5 +1,10 @@
 tiedon talletus kantaan
-reservation lista userilla ja revesrvablelle
+reservationinin talletus
+reservablen talletus
+rooli-taulu kantaan
+tekstisisällön muokkaus
+ownerille jotain toiminnallisuutta
+tiedon validointi
 
 Salasanojen hashaus
 hibernate annotaatiot

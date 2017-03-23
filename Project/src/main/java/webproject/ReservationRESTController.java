@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import webproject.Models.Reservation;
 import webproject.Models.ReservationItem;
+import webproject.Models.User;
 import webproject.dataaccess.ReservationItemRepository;
 import webproject.dataaccess.UserRepository;
 
@@ -36,9 +37,7 @@ public class ReservationRESTController {
         List<SerializableReservation> list = new ArrayList<>();
         
         for(Reservation res : reservations){
-            list.add(new SerializableReservation(res.getId(), res.getReserver().getName(),
-                                                res.getReservationItem().getName(), res.getStartTime(),
-                                                res.getEndTime()));
+            list.add(new SerializableReservation(res));
         }
         
         return list;
@@ -52,7 +51,7 @@ public class ReservationRESTController {
         List<SerializableReservationItem> list = new ArrayList<>();
         
         for(ReservationItem item : reservables){
-            list.add(new SerializableReservationItem());
+            list.add(new SerializableReservationItem(item));
         }
         
         return list;
@@ -61,19 +60,36 @@ public class ReservationRESTController {
     private class SerializableReservation{
         public int id;
         public String user;
+        public int userId;
         public String reservable;
+        public int reservableId;
         public Date startTime;
         public Date endTime;
         
-        public SerializableReservation(int id, String user, String reservable, Date startTime, Date endTime){
-            this.id = id;
-            this.user = user;
-            this.reservable = reservable;
-            this.startTime = startTime;
-            this.endTime = endTime;
+        public SerializableReservation(Reservation res){
+            this.id = res.getId();
+            this.user = res.getReserver().getName();
+            this.reservable = res.getReservationItem().getName();
+            this.startTime = res.getStartTime();
+            this.endTime = res.getEndTime();
+            this.userId = res.getReserver().getId();
+            this.reservableId = res.getReservationItem().getId();
         }
+        
     }
     private class SerializableReservationItem{
+        public int id;
+        public String name;
+        public String info;
+        public String owner;
+        public int ownerId;
         
+        public SerializableReservationItem(ReservationItem item){
+            this.id = item.getId();
+            this.name = item.getName();
+            this.info = item.getInfo();
+            this.owner = item.getOwner().getName();
+            this.ownerId= item.getOwner().getId();
+        }
     }
 }
