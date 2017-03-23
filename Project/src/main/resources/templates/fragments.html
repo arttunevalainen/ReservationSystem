@@ -4,7 +4,7 @@
         <link rel="stylesheet" th:href="@{/css/styles.css}"/>
     </head>
     <body>
-        <div th:fragment="header (title)" class='header'>
+        <div th:fragment="header (title, role)" class='header'>
             <h1 th:text="${title}"></h1>
             <form action="/logout" class="logout">
                 <input type="submit" value="logout"/>
@@ -21,7 +21,7 @@
                     <span><a href='/settings'>Settings</a></span>
                 </div>
                 <div class='nav-button' th:classappend="${title=='New reservable'} ? selected : ''"
-                     th:if="${role == 'admin' || role == 'owner'}">
+                     th:if="${role} == 'admin' || ${role} == 'owner'">
                     <span><a href='/newreservable'>New reservable</a></span>
                 </div>
                 <div class='nav-button' th:classappend="${title=='Admin panel'} ? selected : ''"

@@ -60,7 +60,7 @@ public class HomeController extends WebMvcConfigurerAdapter {
         
         User a = userRepository.get(1);
         a.getReservations().stream()
-                              .forEach(s -> System.out.println(s.getReserver().getName()));
+                           .forEach(s -> System.out.println(s.getReserver().getName()));
         
         
         model.addAttribute("userName", details.getUsername());
@@ -84,5 +84,4 @@ public class HomeController extends WebMvcConfigurerAdapter {
         
         return "home";
     }
-    
 }

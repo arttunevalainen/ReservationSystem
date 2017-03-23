@@ -10,6 +10,7 @@ and open the template in the editor.
         <link rel="stylesheet" th:href="@{/css/styles.css}"/>
     </head>
     <body>
+        <div th:replace="fragments :: header (title=${title}, role=${role})"></div>
         <div>
             <form method="post" th:action="@{/settings}">
                 <table>

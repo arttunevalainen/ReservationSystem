@@ -26,6 +26,7 @@ public class SettingsController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails details = (UserDetails) auth.getPrincipal();
         
+        
         return "settings";
     }
     
