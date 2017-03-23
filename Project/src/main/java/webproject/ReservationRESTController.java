@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import webproject.Models.Reservation;
-import webproject.Models.ReservationItem;
+import webproject.Models.Reservable;
 import webproject.Models.User;
-import webproject.dataaccess.ReservationItemRepository;
+import webproject.dataaccess.ReservableRepository;
 import webproject.dataaccess.UserRepository;
 
 /**
@@ -23,9 +23,9 @@ import webproject.dataaccess.UserRepository;
 public class ReservationRESTController {
     
     private final UserRepository userRepository;
-    private final ReservationItemRepository reservationItemRepository;
+    private final ReservableRepository reservationItemRepository;
     
-    public ReservationRESTController(UserRepository userRepository, ReservationItemRepository resItemRepository){
+    public ReservationRESTController(UserRepository userRepository, ReservableRepository resItemRepository){
         this.userRepository = userRepository;
         this.reservationItemRepository = resItemRepository;
     }
@@ -47,10 +47,10 @@ public class ReservationRESTController {
     public List<SerializableReservationItem> getReservables(@PathVariable String userId){
         //TODO: if there's time, make is possible to set reservables to be visible to selected user only
         //at the moment, all reservables are visible to everyone
-        List<ReservationItem> reservables = reservationItemRepository.getAll();
+        List<Reservable> reservables = reservationItemRepository.getAll();
         List<SerializableReservationItem> list = new ArrayList<>();
         
-        for(ReservationItem item : reservables){
+        for(Reservable item : reservables){
             list.add(new SerializableReservationItem(item));
         }
         
@@ -84,7 +84,7 @@ public class ReservationRESTController {
         public String owner;
         public int ownerId;
         
-        public SerializableReservationItem(ReservationItem item){
+        public SerializableReservationItem(Reservable item){
             this.id = item.getId();
             this.name = item.getName();
             this.info = item.getInfo();

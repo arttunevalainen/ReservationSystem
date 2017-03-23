@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
 import webproject.Models.*;
-import webproject.dataaccess.ReservationItemRepository;
+import webproject.dataaccess.ReservableRepository;
 import webproject.dataaccess.ReservationRepository;
 import webproject.dataaccess.UserRepository;
 
@@ -21,11 +21,11 @@ import webproject.dataaccess.UserRepository;
 public class HomeController extends WebMvcConfigurerAdapter {
     
     private final UserRepository userRepository;
-    private final ReservationItemRepository reservationItemRepository;
+    private final ReservableRepository reservationItemRepository;
     private final ReservationRepository reservationRepository;
     
     public HomeController(UserRepository userRepository,
-                            ReservationItemRepository reservationItemRepository,
+                            ReservableRepository reservationItemRepository,
                             ReservationRepository reservationRepository){
         this.userRepository = userRepository;
         this.reservationItemRepository = reservationItemRepository;
@@ -68,7 +68,7 @@ public class HomeController extends WebMvcConfigurerAdapter {
         model.addAttribute("role", details.getAuthorities());
         model.addAttribute("userId", 1);
         
-        ReservationItem item = reservationItemRepository.get(1);
+        Reservable item = reservationItemRepository.get(1);
         model.addAttribute("reservationitem", item.getName());
         model.addAttribute("ownername", item.getOwner().getName());
         

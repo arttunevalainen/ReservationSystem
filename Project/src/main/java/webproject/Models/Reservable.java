@@ -3,18 +3,18 @@ package webproject.Models;
 import java.util.Set;
 
 
-public class ReservationItem{
+public class Reservable{
     protected int id;
     protected String name;
     protected String info;
     protected User owner;
     protected Set<Reservation> reservations;
     
-    public ReservationItem(){
+    public Reservable(){
         
     }
     
-    public ReservationItem(String name, String info, User user){
+    public Reservable(String name, String info, User user){
         
     }
 

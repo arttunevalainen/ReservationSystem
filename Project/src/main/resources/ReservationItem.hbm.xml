@@ -1,23 +1,16 @@
-<?xml version="1.0"?>
-
-<!DOCTYPE hibernate-mapping PUBLIC
-        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="webproject.Models">
-
-    <class name="ReservationItem" table="Reservable">
-        <id name="id" column="Id">
-            <generator class="increment"/>
-        </id>
-        <property name="name"/>
-        <property name="info"/>
-		<one-to-one name="owner" class="webproject.Models.User"
-			cascade="save-update"></one-to-one>
-		<set name="reservations" cascade="all">
-         <key column="reservableid"/>
-         <one-to-many class="Reservation"/>
-      </set>
-    </class>
-
+  <class name="Reservable" table="Reservable">
+    <id column="Id" name="id">
+      <generator class="increment"/>
+    </id>
+    <property name="name"/>
+    <property name="info"/>
+    <one-to-one cascade="save-update" class="webproject.Models.User" name="owner"/>
+    <set cascade="all" name="reservations">
+      <key column="reservableid"/>
+      <one-to-many class="Reservation"/>
+    </set>
+  </class>
 </hibernate-mapping>

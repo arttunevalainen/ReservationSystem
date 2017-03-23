@@ -12,6 +12,11 @@ import webproject.dataaccess.ReservationRepository;
 @RequestMapping("reservation")
 public class ReservationController {
 
+    //TOIMINNOT
+        //UUSI reservation
+        //peruminen
+        //lisää tietoja varauksen sivulle
+    
     private final ReservationRepository reservationRepository;
     
     public ReservationController(ReservationRepository reservationRepository){
@@ -26,11 +31,9 @@ public class ReservationController {
      */
     @RequestMapping("/{id}")
     public String index(Model model, @PathVariable String id) {
-        //Tänne esim varauksen yleiset tiedot, joku kuva siitä ehkä,
-        // ja aikatauluun kaikki jo varatut ajankohdat
-        
         Reservation res = reservationRepository.get(Integer.parseInt(id));
-        model.addAttribute("title", res.getReservationItem().getName() + " at " + res.getStartTime().toString());
+        model.addAttribute("title", "Reservation");
+        model.addAttribute("reservation_title", res.getReservationItem().getName() + " at " + res.getStartTime().toString());
         return "reservation";
     }
 }

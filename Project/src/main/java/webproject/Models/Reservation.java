@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Reservation{
     private int id;
-    private ReservationItem reservationItem;
+    private Reservable reservationItem;
     private User reserver;
     private Date startTime;
     private Date endTime;
@@ -13,7 +13,7 @@ public class Reservation{
         
     }
     
-    public Reservation(User reserver, ReservationItem reservationItem, Date startTime, Date endTime){
+    public Reservation(User reserver, Reservable reservationItem, Date startTime, Date endTime){
         this.reserver = reserver;
         this.reservationItem = reservationItem;
         this.startTime = startTime;
@@ -24,14 +24,14 @@ public class Reservation{
     /**
      * @return the reservationItem
      */
-    public ReservationItem getReservationItem() {
+    public Reservable getReservationItem() {
         return reservationItem;
     }
 
     /**
      * @param reservationItem the reservationItem to set
      */
-    public void setReservationItem(ReservationItem reservationItem) {
+    public void setReservationItem(Reservable reservationItem) {
         this.reservationItem = reservationItem;
     }
 

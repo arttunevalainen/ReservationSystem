@@ -70,6 +70,7 @@ body{
     
 }
 .reserved-item{
+    display:block;
     margin-left:5px;
     height: 150px;
     width: 150px;
@@ -77,6 +78,21 @@ body{
     border: solid black 2px;
     border-radius: 10px;
     background-color: white;
+}
+
+.reserved-item .reserved-picture{
+    margin-right: 25px;
+    margin-left: 25px;
+    margin-top: 5px;
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+}
+
+.reserved-item .reserved-field{
+    width:100%;
+    text-align:center;
+    display:block;
 }
 
 .reservables{

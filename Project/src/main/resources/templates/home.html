@@ -24,11 +24,6 @@
         </h1>
         <div class='reserved basic-container' id="reserved-container">
             <div class='basic-header'>Items reserved by you:</div>
-            <div class='reserved-item'>
-                <span class="reserved-name">Sauna 1</span>
-                <span class="reserved-time">14.2 13:00 - 15:00</span>
-            </div>
-            
         </div>
 
         <div class='reservables basic-container' id="reservable-container">
@@ -59,26 +54,26 @@
 <script th:inline="javascript">
 $(document).ready(function() {
     var userId = /*[[${userId}]]*/ -1;
-    console.log("userId: " + userId);
     //fetch users current reservations
     $.ajax({
         url:"/reservationREST/users_reservations/" + userId,
         success: function(result){
             console.log(result);
             //todo: use some js template for this (or just substitute with some real framework)
-            /*$.each(result, function(){
+            $.each(result, function(index, item){
                 $("#reserved-container").append(
-                    '<div class="reserved-item">' +
-                        
-                    '</div>'
+                    '<a href="/reservation/'+ item.id +'" class="reserved-item">'+
+                        '<div class="reserved-picture"></div>' +
+                        '<span class="reserved-field">' + item.reservable + '</span>' +
+                        '<span class="reserved-field">' + '14.2 13:00 - 15:00' + '</span>' + 
+                    '</a>'
                 );
-            });*/
+            });
             
         }
     });
     
     //fetch reservables available for user
-    
     $.ajax({
         url:"/reservationREST/users_reservables/" + userId,
         success: function(result){

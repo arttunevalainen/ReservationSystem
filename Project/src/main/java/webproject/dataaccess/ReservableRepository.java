@@ -7,30 +7,30 @@ import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 import webproject.Application;
-import webproject.Models.ReservationItem;
+import webproject.Models.Reservable;
 
 /**
  *
  * @author Ilmari Mäntysaari
  */
 @Component
-public class ReservationItemRepository {
+public class ReservableRepository {
     
     public void save(){
         //foreign keyt? hibernate valittaa ownerId sarakkeesta
     }
     
-    public ReservationItem get(int id){
+    public Reservable get(int id){
         Session session = Application.sessionFactory.openSession();
-        ReservationItem item = session.get(ReservationItem.class, 1);
+        Reservable item = session.get(Reservable.class, 1);
         Hibernate.initialize(item.getReservations());
         session.close();
         return item;
     }
     
-    public List<ReservationItem> getAll(){
+    public List<Reservable> getAll(){
         Session session = Application.sessionFactory.openSession();
-        List<ReservationItem> items = session.createCriteria(ReservationItem.class).list();
+        List<Reservable> items = session.createCriteria(Reservable.class).list();
         
         items.stream().forEach(x -> Hibernate.initialize(x.getReservations()));
         
