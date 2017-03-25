@@ -10,9 +10,15 @@
 <body>
     <div th:replace="fragments :: header (title=${title}, role=${role})"></div>
     <div class='content'>
-        <h1 th:text="${reservable.name}">
-            
+        <h1>
+           New reservation 
         </h1>
+        <form>
+            Name: <input type="text" name="name"/>
+            Address or location: <input type="text" name="address"/>
+            Description: <textarea name="description"></textarea>
+            <input type="submit" value="Submit"/>
+        </form>
     </div>
     
 </body>

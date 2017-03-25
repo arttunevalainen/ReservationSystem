@@ -10,21 +10,22 @@
                 <input type="submit" value="logout"/>
             </form>
             <div class='navbar'>
-                <div class='nav-button' th:classappend="${title=='Home'} ? selected : ''">
+                <div class='button' th:classappend="${title=='Home'} ? selected : ''">
                     <span><a href='/home'>Home</a></span>
                 </div>
-                <!-- tätä ei välttämättä tarvii, jos laitetaan vaan kaikki etusivulle-->
-                <div class='nav-button' th:classappend="${title=='Reservations'} ? selected : ''">
-                    <span><a href='/reservations'>Reservations</a></span>
+                <div class='button' th:classappend="${title=='Reservations'} ? selected : ''">
+                    <span><a href='/reservable/list'>Reservations</a></span>
                 </div>
-                <div class='nav-button' th:classappend="${title=='Settings'} ? selected : ''">
+                <div class='button' th:classappend="${title=='Settings'} ? selected : ''">
                     <span><a href='/settings'>Settings</a></span>
                 </div>
-                <div class='nav-button' th:classappend="${title=='New reservable'} ? selected : ''"
+                
+<!--               tää tuleekin reservables sivulle, poistetaan varmaan täältä
+<div class='nav-button' th:classappend="${title=='New reservable'} ? selected : ''"
                      th:if="${role} == 'admin' || ${role} == 'owner'">
                     <span><a href='/newreservable'>New reservable</a></span>
-                </div>
-                <div class='nav-button' th:classappend="${title=='Admin panel'} ? selected : ''"
+                </div>-->
+                <div class='button' th:classappend="${title=='Admin panel'} ? selected : ''"
                      th:if="${role == 'admin'}">
                     <span><a href='/adminpanel'>Admin panel</a></span>
                 </div>

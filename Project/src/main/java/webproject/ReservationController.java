@@ -11,11 +11,6 @@ import webproject.dataaccess.ReservationRepository;
 @Controller
 @RequestMapping("reservation")
 public class ReservationController {
-
-    //TOIMINNOT
-        //UUSI reservation
-        //peruminen
-        //lisää tietoja varauksen sivulle
     
     private final ReservationRepository reservationRepository;
     

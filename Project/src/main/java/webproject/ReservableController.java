@@ -20,18 +20,18 @@ public class ReservableController{
         this.reservableRepository = reservableRepository;
     }
     
-    @RequestMapping("")
-    public String index(Model model, @PathVariable String id) {
-        
+    @RequestMapping("/list")
+    public String index(Model model) {
+        //tänne lista reservableista ja nappi uuden lisäämiseksi
         List<Reservable> res = reservableRepository.getAll();
         model.addAttribute("reservables", res);
         model.addAttribute("title", "Reservable");
         return "reservable/index";
     }
     
-    @RequestMapping("/{id}")
+    @RequestMapping("/info/{id}")
     public String id(Model model, @PathVariable String id) {
-        
+        //tsekkaa että userilla oikeudet nähdä tämä
         Reservable res = reservableRepository.get(Integer.parseInt(id));
         model.addAttribute("reservable", res);
         model.addAttribute("title", "Reservable");
@@ -39,7 +39,8 @@ public class ReservableController{
     }
     
     @RequestMapping("/new")
-    public String newReservable(){
+    public String newReservable(Model model){
+        //tsekkaa että oikeus lisätä reservable
         return "reservable/new";
     }
 }
