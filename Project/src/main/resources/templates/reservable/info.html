@@ -11,8 +11,10 @@
     <div th:replace="fragments :: header (title=${title}, role=${role})"></div>
     <div class='content'>
         <h1 th:text="${reservable.name}">
-            
         </h1>
+        <div class="reservable-description" th:text="${reservable.info}">
+            
+        </div>
     </div>
     
 </body>

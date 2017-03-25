@@ -10,19 +10,11 @@
 <body>
     <div th:replace="fragments :: header (title=${title}, role=${role})"></div>
     <div class='content'>
-<!--        näytetään vain jos käyytäjällä on oikeus lisätä uusi-->
-        <div class='button' style="float:right;">
-            <span><a href='/reservable/new'>Add new reservable</a></span>
+        <h1 style="text-align: center"> New reservable was added succesfully</h1>
+        <div class='button'>
+            <span><a href='/reservable/list'>Back</a></span>
         </div>
-        
-        <div class="reservable-list">
-            <div class="reservable">
-                
-            </div>
-        </div>
-        
     </div>
-    
 <script>
 
 </script>

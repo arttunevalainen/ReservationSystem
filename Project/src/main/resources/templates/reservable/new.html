@@ -13,11 +13,11 @@
         <h1>
            New reservation 
         </h1>
-        <form>
-            Name: <input type="text" name="name"/>
-            Address or location: <input type="text" name="address"/>
-            Description: <textarea name="description"></textarea>
-            <input type="submit" value="Submit"/>
+        
+        <form action="#" th:action="@{/reservable/new}" th:object="${newReservable}" method="post">
+            <p>Name: <input type="text" th:field="*{name}" /></p>
+            <p>Description: <input type="text" th:field="*{info}" /></p>
+            <p><input type="submit" value="Submit" /></p>
         </form>
     </div>
     

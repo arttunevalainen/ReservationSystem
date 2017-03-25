@@ -42,7 +42,7 @@ body{
     background-color:white;
 }
 
-.header .nav-button.selected{
+.header .button.selected{
     background-color: #00cc00;
 }
 

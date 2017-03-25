@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>KEBAB</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" th:href="@{/css/styles.css}"/>
+
+</head>
+<body>
+    <div th:replace="fragments :: header (title=${title}, role=${role})"></div>
+    <div class='content'>
+<!--        TODO: näytetään vain jos käyytäjällä on oikeus lisätä uusi-->
+        <div class='button' style="float:right;">
+            <span><a href='/reservable/new'>Add new reservable</a></span>
+        </div>
+        
+        <div class="reservable-list">
+            <div class="reservable">
+                
+            </div>
+        </div>
+        
+    </div>
+    
+<script>
+
+</script>
+</body>
+</html>

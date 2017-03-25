@@ -27,7 +27,7 @@ public class ReservationController {
     @RequestMapping("/{id}")
     public String index(Model model, @PathVariable String id) {
         Reservation res = reservationRepository.get(Integer.parseInt(id));
-        model.addAttribute("title", "Reservation");
+        model.addAttribute("title", "Reservations");
         model.addAttribute("reservation_title", res.getReservationItem().getName() + " at " + res.getStartTime().toString());
         return "reservation";
     }

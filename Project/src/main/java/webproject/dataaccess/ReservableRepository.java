@@ -2,7 +2,6 @@
 package webproject.dataaccess;
 
 import java.util.List;
-import java.util.Set;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.springframework.stereotype.Component;
@@ -16,8 +15,15 @@ import webproject.Models.Reservable;
 @Component
 public class ReservableRepository {
     
-    public void save(){
+    public void save(Reservable reservable){ 
         //foreign keyt? hibernate valittaa ownerId sarakkeesta
+        Session session = Application.sessionFactory.openSession();
+        
+        session.beginTransaction();
+        session.save(reservable);
+        session.getTransaction().commit();
+        
+        session.close();
     }
     
     public Reservable get(int id){

@@ -7,7 +7,7 @@
     </id>
     <property name="name"/>
     <property name="info"/>
-    <one-to-one cascade="save-update" class="webproject.Models.User" name="owner"/>
+    <many-to-one cascade="save-update" class="webproject.Models.User" column="ownerid" name="owner"/>
     <set cascade="all" name="reservations">
       <key column="reservableid"/>
       <one-to-many class="Reservation"/>
