@@ -1,7 +1,7 @@
 
 package webproject;
 
-import org.hibernate.Hibernate;
+import java.util.List;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -53,29 +53,31 @@ public class HomeController extends WebMvcConfigurerAdapter {
     public String index(Model model) {
         
         //Saadaan kaivettua kirjautunut. Tietokannasta pitäisi saada id sun muut vielä josta tehdä User olio??
-        //Tällä .getUsername() ja .getAuthorities() joka Collection oikeuksista. Voin tehä tän torstaina.
+        //Tällä .getUsername() ja .getAuthorities() joka Collection oikeuksista.
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails details = (UserDetails) auth.getPrincipal();
         
+        //TÄSSÄ KÄYTTÄJÄN ID HAKU KÄYTTÄJÄNIMELLÄ.
+        int userid = userRepository.getUserIDByUserName(details.getUsername());
         
-        User a = userRepository.get(1);
+        
+        User a = userRepository.get(userid);
         a.getReservations().stream()
                            .forEach(s -> System.out.println(s.getReserver().getName()));
         
         
-        model.addAttribute("userName", details.getUsername());
         model.addAttribute("title", "Home");
         model.addAttribute("role", details.getAuthorities());
-        model.addAttribute("userId", 1);
+        model.addAttribute("userId", userid);
         
         Reservable item = reservationItemRepository.get(1);
         model.addAttribute("reservationitem", item.getName());
         model.addAttribute("ownername", item.getOwner().getName());
-        
+     
         item.getReservations().stream()
                               .forEach(s -> System.out.println(s.getReserver().getName()));
         
-        Reservation res = reservationRepository.get(1);
+        Reservation res = reservationRepository.get(userid);
         
         model.addAttribute("reservation_reservable", res.getReservationItem().getName());
         model.addAttribute("reservation_user", res.getReserver().getName());

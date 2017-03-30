@@ -4,7 +4,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Settings</title>
         <link rel="stylesheet" th:href="@{/css/styles.css}"/>
@@ -12,13 +12,15 @@ and open the template in the editor.
     <body>
         <div th:replace="fragments :: header (title=${title}, role=${role})"></div>
         <div>
-            <form method="post" th:action="@{/settings}">
+            <span th:text="${error}"></span>
+            <form method="POST" th:action="@{/settings}">
                 <table>
+                    <tr><th>Change your password</th></tr>
                     <tr>
-                        <td>Name:<input type="text" value="NIMESI"/></td>
+                        <td>Password:<input type="password" name="password1" id="password1"/></td>
                     </tr>
                     <tr>
-                        <td>Password:<input type="text" value="SALASANASI"/></td>
+                        <td>And again:<input type="password" name="password2" id="password2"/></td>
                     </tr>
                     <tr>
                         <td><button type="submit" value="Save" th:text="Save"></button></td>

@@ -5,12 +5,19 @@
  */
 package webproject;
 
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import webproject.dataaccess.UserRepository;
 
 /**
  *
@@ -19,21 +26,38 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class SettingsController {
     
+    private final UserRepository userRepository;
+    
+    public SettingsController(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
     
     @GetMapping("/settings")
-    public String settings() {
+    public String settings(Model model) {
+        
+        model.addAttribute("title", "Settings");
      
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails details = (UserDetails) auth.getPrincipal();
         
+        model.addAttribute("userName", details.getUsername());
         
         return "settings";
     }
     
     //Palautetaan tietojen tallentamisen jälkeen home.
-    @PostMapping("/settings")
-    public String saved() {
+    @RequestMapping(value = "/settings", method = RequestMethod.POST)
+    public String saved(Model error, HttpServletRequest request) {
         
-        return "home";
+        String password1 = request.getParameter("password1");
+        String password2 = request.getParameter("password2");
+        
+        if(!password1.equals(password2) || password1.equals("")) {
+            error.addAttribute("error", "Error changing password");
+            return "redirect:settings";
+        }
+        else {
+            return "redirect:home";
+        }
     }
 }
