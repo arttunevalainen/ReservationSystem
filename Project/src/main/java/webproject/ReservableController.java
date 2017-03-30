@@ -2,6 +2,7 @@
 package webproject;
 
 import java.util.List;
+import org.postgresql.util.PSQLException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,11 +29,11 @@ public class ReservableController{
     
     @RequestMapping("/list")
     public String list(Model model) {
-        //tänne lista reservableista ja nappi uuden lisäämiseksi
+        
         List<Reservable> res = reservableRepository.getAll();
         model.addAttribute("reservables", res);
         model.addAttribute("title", "Reservations");
-        return "reservable/index";
+        return "reservable/list";
     }
     
     @RequestMapping("/info/{id}")
@@ -40,6 +41,7 @@ public class ReservableController{
         //tsekkaa että userilla oikeudet nähdä tämä
         Reservable res = reservableRepository.get(Integer.parseInt(id));
         model.addAttribute("reservable", res);
+        model.addAttribute("reservations", res.getReservations());
         model.addAttribute("title", "Reservations");
         return "reservable/info";
     }
@@ -53,16 +55,23 @@ public class ReservableController{
     }
     
     @PostMapping("/new")
-    public String newReservablePost(@ModelAttribute ReservablePostModel newRes) {
+    public String newReservablePost(@ModelAttribute ReservablePostModel newRes, Model model) {
         
         Reservable reservable = new Reservable();
         reservable.setName(newRes.getName());
         reservable.setInfo(newRes.getInfo());
-        //TODO: change this to current logged user
-        reservable.setOwner(userRepository.get(1));
+        model.addAttribute("result", "New reservable was added succesfully");
         
-        reservableRepository.save(reservable);
+        try{
+            //TODO: change this to current logged user
+            reservable.setOwner(userRepository.get(1));
+            
+            reservableRepository.save(reservable);
+        }
+        catch(PSQLException ex){
+            model.addAttribute("result", "Error while processing request");
+        }
         
-        return "reservable/postsuccess";
+        return "reservable/postback";
     }
 }

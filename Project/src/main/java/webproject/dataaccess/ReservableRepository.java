@@ -4,6 +4,7 @@ package webproject.dataaccess;
 import java.util.List;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
+import org.postgresql.util.PSQLException;
 import org.springframework.stereotype.Component;
 import webproject.Application;
 import webproject.Models.Reservable;
@@ -15,10 +16,10 @@ import webproject.Models.Reservable;
 @Component
 public class ReservableRepository {
     
-    public void save(Reservable reservable){ 
-        //foreign keyt? hibernate valittaa ownerId sarakkeesta
-        Session session = Application.sessionFactory.openSession();
+    public void save(Reservable reservable) throws PSQLException{
         
+        Session session = Application.sessionFactory.openSession();
+        Hibernate.initialize(reservable);
         session.beginTransaction();
         session.save(reservable);
         session.getTransaction().commit();
@@ -28,7 +29,7 @@ public class ReservableRepository {
     
     public Reservable get(int id){
         Session session = Application.sessionFactory.openSession();
-        Reservable item = session.get(Reservable.class, 1);
+        Reservable item = session.get(Reservable.class, id);
         Hibernate.initialize(item.getReservations());
         session.close();
         return item;

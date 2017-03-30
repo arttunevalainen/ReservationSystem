@@ -19,14 +19,8 @@
                 <div class='button' th:classappend="${title=='Settings'} ? selected : ''">
                     <span><a href='/settings'>Settings</a></span>
                 </div>
-                
-<!--               tää tuleekin reservables sivulle, poistetaan varmaan täältä
-<div class='nav-button' th:classappend="${title=='New reservable'} ? selected : ''"
-                     th:if="${role} == 'admin' || ${role} == 'owner'">
-                    <span><a href='/newreservable'>New reservable</a></span>
-                </div>-->
                 <div class='button' th:classappend="${title=='Admin panel'} ? selected : ''"
-                     th:if="${role == 'admin'}">
+                     th:if="${role == '[admin]'}">
                     <span><a href='/adminpanel'>Admin panel</a></span>
                 </div>
             </div>

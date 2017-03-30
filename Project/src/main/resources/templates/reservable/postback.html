@@ -10,7 +10,7 @@
 <body>
     <div th:replace="fragments :: header (title=${title}, role=${role})"></div>
     <div class='content'>
-        <h1 style="text-align: center"> New reservable was added succesfully</h1>
+        <h1 th:text="${result}" style="text-align: center"> </h1>
         <div class='button'>
             <span><a href='/reservable/list'>Back</a></span>
         </div>

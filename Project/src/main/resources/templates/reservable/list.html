@@ -11,13 +11,14 @@
     <div th:replace="fragments :: header (title=${title}, role=${role})"></div>
     <div class='content'>
 <!--        TODO: näytetään vain jos käyytäjällä on oikeus lisätä uusi-->
-        <div class='button' style="float:right;">
+        <div class='button' style="float:right;clear:left;">
             <span><a href='/reservable/new'>Add new reservable</a></span>
         </div>
         
-        <div class="reservable-list">
-            <div class="reservable">
-                
+        <div class="reservable-list" style='clear:right;'>
+            <div class="basic-container reservable" th:each="res : ${reservables}">
+                <div class='basic-header reservable-name'><a th:href="@{'~/reservable/info/' + ${res.id}}" th:text="${res.name}"></a></div>
+                <span class="reservable-info" th:text="${res.info}"></span>
             </div>
         </div>
         

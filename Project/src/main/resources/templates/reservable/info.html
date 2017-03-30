@@ -5,6 +5,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.min.css'/> 
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js'></script>
+<script src='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.js'></script>
 
 </head>
 <body>
@@ -13,9 +17,21 @@
         <h1 th:text="${reservable.name}">
         </h1>
         <div class="reservable-description" th:text="${reservable.info}">
-            
+        </div>
+        <div class='available-reservations'>
+            <div id='calendar'></div>
         </div>
     </div>
-    
+<script>
+$(document).ready(function() {
+    $('#calendar').fullCalendar({
+        dayclick:function(){
+            console.log("dayclick");
+        }
+        
+    })
+
+});
+</script>
 </body>
 </html>
