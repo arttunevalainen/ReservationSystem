@@ -51,23 +51,20 @@ public class HomeController extends WebMvcConfigurerAdapter {
     @RequestMapping("/home")
     public String index(Model model) {
         
-        //Saadaan kaivettua kirjautunut. Tietokannasta pitäisi saada id sun muut vielä josta tehdä User olio??
-        //Tällä .getUsername() ja .getAuthorities() joka Collection oikeuksista.
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails details = (UserDetails) auth.getPrincipal();
         
         //TÄSSÄ KÄYTTÄJÄN ID HAKU KÄYTTÄJÄNIMELLÄ.
-        int userid = userRepository.getUserIDByUserName(details.getUsername());
+        int userid = userRepository.getUserIDByUserName(Role.getUserDetails().getUsername());
         
         
         User a = userRepository.get(userid);
         a.getReservations().stream()
                            .forEach(s -> System.out.println(s.getReserver().getName()));
         
-        model.addAttribute("userName", details.getUsername());
+        
+        model.addAttribute("userName", Role.getUserDetails().getUsername());
         model.addAttribute("title", "Home");
-        model.addAttribute("role", details.getAuthorities());
         model.addAttribute("userId", userid);
+        model.addAttribute("role", Role.getRole());
         
         Reservable item = reservationItemRepository.get(1);
         model.addAttribute("reservationitem", item.getName());
