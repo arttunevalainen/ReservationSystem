@@ -20,9 +20,9 @@
                 <div class='button' th:classappend="${title=='Settings'} ? selected : ''">
                     <span><a href='/settings'>Settings</a></span>
                 </div>
-                <div class='button' th:classappend="${title=='Admin panel'} ? selected : ''"
-                     th:if="${role == '[admin]'}">
-                    <span><a href='/adminpanel'>Admin panel</a></span>
+                <div class='button' th:classappend="${title=='Admin settings'} ? selected : ''"
+                     th:if="${role == 'admin'}">
+                    <span><a href='/adminsettings'>Admin panel</a></span>
                 </div>
             </div>
         </div>

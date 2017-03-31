@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import webproject.Models.Role;
 import webproject.Models.User;
 import webproject.dataaccess.UserRepository;
 
@@ -36,10 +37,7 @@ public class SettingsController {
     @GetMapping("/settings")
     public String settings(Model model) {
      
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails details = (UserDetails) auth.getPrincipal();
-        
-        model.addAttribute("userName", details.getUsername());
+        model.addAttribute("userName", Role.getUserDetails().getUsername());
         model.addAttribute("title", "Settings");
         
         return "settings";
@@ -61,9 +59,8 @@ public class SettingsController {
         else {
             
             //TÄSSÄ KÄYTTÄJÄN ID HAKU KÄYTTÄJÄNIMELLÄ.
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            UserDetails details = (UserDetails) auth.getPrincipal();
-            int userid = userRepository.getUserIDByUserName(details.getUsername());
+            
+            int userid = userRepository.getUserIDByUserName(Role.getUserDetails().getUsername());
             
             userRepository.changePassword(userid, password1);
             
