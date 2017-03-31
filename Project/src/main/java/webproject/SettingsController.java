@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import webproject.Models.User;
 import webproject.dataaccess.UserRepository;
 
 /**
@@ -34,13 +35,12 @@ public class SettingsController {
     
     @GetMapping("/settings")
     public String settings(Model model) {
-        
-        model.addAttribute("title", "Settings");
      
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails details = (UserDetails) auth.getPrincipal();
         
         model.addAttribute("userName", details.getUsername());
+        model.addAttribute("title", "Settings");
         
         return "settings";
     }
@@ -49,14 +49,24 @@ public class SettingsController {
     @RequestMapping(value = "/settings", method = RequestMethod.POST)
     public String saved(Model error, HttpServletRequest request) {
         
+        //Saadaan käyttäjän salasanat
         String password1 = request.getParameter("password1");
         String password2 = request.getParameter("password2");
         
+        //Tarkistetaan samanlaisuus ja eivät tyhjiä.
         if(!password1.equals(password2) || password1.equals("")) {
             error.addAttribute("error", "Error changing password");
             return "redirect:settings";
         }
         else {
+            //TÄSSÄ KÄYTTÄJÄN ID HAKU KÄYTTÄJÄNIMELLÄ.
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            UserDetails details = (UserDetails) auth.getPrincipal();
+            int userid = userRepository.getUserIDByUserName(details.getUsername());
+            
+            userRepository.changePassword(userid, password1);
+            
+            
             return "redirect:home";
         }
     }

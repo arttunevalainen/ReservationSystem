@@ -2,8 +2,10 @@
 package webproject.dataaccess;
 
 import java.util.List;
+import javax.transaction.Transactional;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Component;
 import webproject.Application;
@@ -35,7 +37,6 @@ public class UserRepository {
     //User id by username
     public int getUserIDByUserName(String username) {
         
-        
         Session session = Application.sessionFactory.openSession();
         String hql = "SELECT u.id FROM User u WHERE username=:name";
         Query query = session.createQuery(hql);
@@ -44,5 +45,19 @@ public class UserRepository {
         
         session.close();
         return Integer.parseInt(results.get(0).toString());
+    }
+    
+    @Transactional
+    public void changePassword(int id, String password) {
+        
+        Session session = Application.sessionFactory.openSession();
+        Transaction t = session.beginTransaction();
+        Query query = session.createQuery("UPDATE User u SET u.password = :psswrd WHERE u.id=:id");
+        query.setParameter("psswrd", password);
+        query.setParameter("id", id);
+        query.executeUpdate();
+       
+        //session.getTransaction().commit();
+        session.close();
     }
 }

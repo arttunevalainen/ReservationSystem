@@ -65,7 +65,7 @@ public class HomeController extends WebMvcConfigurerAdapter {
         a.getReservations().stream()
                            .forEach(s -> System.out.println(s.getReserver().getName()));
         
-        
+        model.addAttribute("userName", details.getUsername());
         model.addAttribute("title", "Home");
         model.addAttribute("role", details.getAuthorities());
         model.addAttribute("userId", userid);
