@@ -10,6 +10,8 @@
 </head>
 <body>
     <span th:text="${accountCreationSuccess}"></span>
+    <span th:if="${param.error}">Username or password is incorrect</span>
+    <span th:if="${param.logout}">You have logged out!</span>
     <div>
         <form class="login" th:action="@{/login}" method="post">
             <table>

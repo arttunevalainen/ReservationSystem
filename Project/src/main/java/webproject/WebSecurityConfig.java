@@ -49,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                             "SELECT username, password, true FROM users WHERE username=?")
                     .authoritiesByUsernameQuery(
                             "SELECT username, role FROM users WHERE username=?");
-            //auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
+            
             }
         catch(Exception e) {
             
