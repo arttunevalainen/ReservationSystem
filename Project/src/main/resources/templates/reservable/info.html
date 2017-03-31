@@ -18,19 +18,46 @@
         </h1>
         <div class="reservable-description" th:text="${reservable.info}">
         </div>
+        <div id='reservation-confirmation'>
+            
+        </div>
         <div class='available-reservations'>
             <div id='calendar'></div>
         </div>
     </div>
-<script>
+<script th:inline="javascript">
 $(document).ready(function() {
-    $('#calendar').fullCalendar({
-        dayclick:function(){
-            console.log("dayclick");
+    
+    var reservableId =  /*[[${reservableId}]]*/ 0;
+    
+    $.ajax({
+        url:"/reservationREST/reservables_reservations/" + reservableId,
+        success: function(result){
+            var event = result;
+            $("#calendar").fullCalendar('addEventSource', event );          
         }
-        
-    })
-
+    });
+    
+    $('#calendar').fullCalendar({
+        dayClick:function(date, jsEvent, view){
+            if(!dayHasEvents(date)){
+                console.log("öaksjdlkasjd");
+                $('#reservation-confirmation').html(date);
+            }
+        }
+    });
+    
+    //Check if the day clicked already has an event
+    function dayHasEvents(date){
+        var events = $('#calendar').fullCalendar('clientEvents');
+        var hasEvents = false;
+        $.each(events,function(index, event){
+            if(event.start.isSame(date)){
+                hasEvents = true;
+            }
+        });
+        return hasEvents;
+    }
 });
 </script>
 </body>

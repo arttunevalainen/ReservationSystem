@@ -10,7 +10,9 @@
 <body>
     <div th:replace="fragments :: header (title=${title}, role=${role})"></div>
     <div class='content'>
-<!--        TODO: näytetään vain jos käyytäjällä on oikeus lisätä uusi-->
+
+<h1 style='display:inline-block'>Items available for reservation</h1>
+        <!--        TODO: näytetään vain jos käyytäjällä on oikeus lisätä uusi-->
         <div class='button' style="float:right;clear:left;">
             <span><a href='/reservable/new'>Add new reservable</a></span>
         </div>

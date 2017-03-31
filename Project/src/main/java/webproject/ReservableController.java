@@ -48,6 +48,8 @@ public class ReservableController{
         model.addAttribute("reservable", res);
         model.addAttribute("reservations", res.getReservations());
         model.addAttribute("title", "Reservations");
+        
+        model.addAttribute("reservableId", id);
         return "reservable/info";
     }
     
@@ -92,6 +94,7 @@ public class ReservableController{
         Reservation res = reservationRepository.get(Integer.parseInt(id));
         model.addAttribute("title", "Reservations");
         model.addAttribute("reservation_title", res.getReservationItem().getName() + " at " + res.getStartTime().toString());
+        
         return "reservation";
     }
     

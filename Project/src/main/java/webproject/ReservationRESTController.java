@@ -1,6 +1,8 @@
 
 package webproject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,11 +24,12 @@ import webproject.dataaccess.UserRepository;
 public class ReservationRESTController {
     
     private final UserRepository userRepository;
-    private final ReservableRepository reservationItemRepository;
+    private final ReservableRepository reservableRepository;
+    
     
     public ReservationRESTController(UserRepository userRepository, ReservableRepository resItemRepository){
         this.userRepository = userRepository;
-        this.reservationItemRepository = resItemRepository;
+        this.reservableRepository = resItemRepository;
     }
     
     @RequestMapping("/users_reservations/{userId}")
@@ -37,6 +40,19 @@ public class ReservationRESTController {
         
         for(Reservation res : reservations){
             list.add(new SerializableReservation(res));
+        }
+        
+        return list;
+    }
+    
+    @RequestMapping("/reservables_reservations/{reservableId}")
+    public List<ReservationEvent> reservablesReservations(@PathVariable String reservableId){
+        System.out.println("PErksles");
+        Set<Reservation> reservations = reservableRepository.get(Integer.parseInt(reservableId)).getReservations();
+        List<ReservationEvent> list = new ArrayList<>();
+        
+        for(Reservation res : reservations){
+            list.add(new ReservationEvent(res));
         }
         
         return list;
@@ -60,6 +76,18 @@ public class ReservationRESTController {
             this.userId = res.getReserver().getId();
             this.reservableId = res.getReservationItem().getId();
         }
+    }
+    
+    private class ReservationEvent{
+        public String start;
+        public String end;
+        public String title;
         
+        public ReservationEvent(Reservation res){
+            this.title = res.getReserver().getName();
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            this.start = df.format(res.getStartTime());
+            this.end = df.format(res.getEndTime());
+        }
     }
 }

@@ -1,11 +1,7 @@
-tiedon talletus kantaan
-reservationinin talletus
-reservablen talletus
-rooli-taulu kantaan
-tekstisisällön muokkaus
-ownerille jotain toiminnallisuutta
-tiedon validointi
+userin roolin haku
+reservationin luonti
+
+etusivun muutos
 
 Salasanojen hashaus
 hibernate annotaatiot
-ajax etusivulle
