@@ -59,13 +59,13 @@ public class SettingsController {
             return "redirect:settings";
         }
         else {
+            
             //TÄSSÄ KÄYTTÄJÄN ID HAKU KÄYTTÄJÄNIMELLÄ.
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             UserDetails details = (UserDetails) auth.getPrincipal();
             int userid = userRepository.getUserIDByUserName(details.getUsername());
             
             userRepository.changePassword(userid, password1);
-            
             
             return "redirect:home";
         }

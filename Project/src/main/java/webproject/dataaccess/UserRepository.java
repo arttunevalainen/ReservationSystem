@@ -57,7 +57,23 @@ public class UserRepository {
         query.setParameter("id", id);
         query.executeUpdate();
        
-        //session.getTransaction().commit();
         session.close();
+    }
+    
+    //Is username available?
+    public boolean usernameAvailable(String name) {
+        Session session = Application.sessionFactory.openSession();
+        String hql = "SELECT u.id FROM User u WHERE username=:name";
+        Query query = session.createQuery(hql);
+        query.setParameter("name", name);
+        List results = query.list();
+        session.close();
+        
+        if(results.isEmpty()) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

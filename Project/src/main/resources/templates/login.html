@@ -9,26 +9,31 @@
 
 </head>
 <body>
-
+    <span th:text="${accountCreationSuccess}"></span>
     <div>
         <form class="login" th:action="@{/login}" method="post">
             <table>
                 <tr>
                     <tr>
-                        <td>Nimi:</td>
+                        <td>Username:</td>
                     </tr>
-                    <td><input type="text" name = "username"/></td>
+                    <tr>
+                        <td><input type="text" name = "username"/></td>
+                    </tr>
                 </tr>
                 <tr>
                     <tr>
-                        <td>Salasana:</td>
+                        <td>Password:</td>
                     </tr>
-                    <td><input type="password" name = "password" /></td>
+                    <tr>
+                        <td><input type="password" name = "password" /></td>
+                    </tr>
                 </tr>
                 <tr>
-                    <td id="submit"><button type="Submit">Kirjaudu</button></td>
+                    <td id="submit"><button type="Submit">Log in</button></td>
                 </tr>
             </table>
+            <p>Or would you like to <a href='signup'>sign up now?</a></p>
         </form>
     </div>
 		

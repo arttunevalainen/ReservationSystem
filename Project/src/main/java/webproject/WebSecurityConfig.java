@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //Kirjautunut ohjautuu kotisivulle.
         http
             .authorizeRequests()
-                .antMatchers("/login", "/css/styles.css").permitAll()
+                .antMatchers("/login", "/signup", "/css/styles.css").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
