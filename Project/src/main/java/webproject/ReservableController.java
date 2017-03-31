@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import webproject.Models.Reservable;
 import webproject.Models.ReservablePostModel;
+import webproject.Models.Reservation;
 import webproject.dataaccess.ReservableRepository;
+import webproject.dataaccess.ReservationRepository;
 import webproject.dataaccess.UserRepository;
 
 
@@ -21,10 +23,13 @@ public class ReservableController{
 
     private final ReservableRepository reservableRepository;
     private final UserRepository userRepository;
+    private final ReservationRepository reservationRepository;
     
-    public ReservableController(ReservableRepository reservableRepository, UserRepository userRepository){
+    public ReservableController(ReservableRepository reservableRepository, UserRepository userRepository,
+                                ReservationRepository reservationRepository){
         this.reservableRepository = reservableRepository;
         this.userRepository = userRepository;
+        this.reservationRepository = reservationRepository;
     }
     
     @RequestMapping("/list")
@@ -74,4 +79,21 @@ public class ReservableController{
         
         return "reservable/postback";
     }
+    
+    
+    /**
+     * Reservation page
+     * @param model
+     * @param id
+     * @return 
+     */
+    @RequestMapping("/reservation/{id}")
+    public String reservation(Model model, @PathVariable String id) {
+        Reservation res = reservationRepository.get(Integer.parseInt(id));
+        model.addAttribute("title", "Reservations");
+        model.addAttribute("reservation_title", res.getReservationItem().getName() + " at " + res.getStartTime().toString());
+        return "reservation";
+    }
+    
+    
 }

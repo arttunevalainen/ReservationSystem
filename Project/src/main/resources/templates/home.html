@@ -27,30 +27,6 @@
         <div class='reserved basic-container' id="reserved-container">
             <div class='basic-header'>Items reserved by you:</div>
         </div>
-
-        <div class='reservables basic-container' id="reservable-container">
-            <div class='basic-header'>Items available for reservation</div>
-            <div class='reservable-item'>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Owner</th>
-                            <th>jotain</th>
-                            <th>muuta</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
         
     </div>
 <script th:inline="javascript">
@@ -71,15 +47,6 @@ $(document).ready(function() {
                     '</a>'
                 );
             });
-            
-        }
-    });
-    
-    //fetch reservables available for user
-    $.ajax({
-        url:"/reservationREST/users_reservables/" + userId,
-        success: function(result){
-            console.log(result);
             
         }
     });

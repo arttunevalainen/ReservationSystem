@@ -1,4 +1,19 @@
 
+
+/*
+
+
+POISTETAAN TÄÄ
+
+
+
+*/
+
+
+
+
+
+
 package webproject;
 
 import org.springframework.stereotype.Controller;
@@ -18,17 +33,7 @@ public class ReservationController {
         this.reservationRepository = reservationRepository;
     }
     
-    /**
-     * Reservation page
-     * @param model
-     * @param id
-     * @return 
-     */
-    @RequestMapping("/{id}")
-    public String index(Model model, @PathVariable String id) {
-        Reservation res = reservationRepository.get(Integer.parseInt(id));
-        model.addAttribute("title", "Reservations");
-        model.addAttribute("reservation_title", res.getReservationItem().getName() + " at " + res.getStartTime().toString());
-        return "reservation";
-    }
+    
+    
+    
 }

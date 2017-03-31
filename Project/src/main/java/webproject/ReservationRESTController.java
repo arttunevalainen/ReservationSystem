@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import webproject.Models.Reservation;
 import webproject.Models.Reservable;
-import webproject.Models.User;
 import webproject.dataaccess.ReservableRepository;
 import webproject.dataaccess.UserRepository;
 
@@ -43,20 +42,6 @@ public class ReservationRESTController {
         return list;
     }
     
-    @RequestMapping("/users_reservables/{userId}")
-    public List<SerializableReservationItem> getReservables(@PathVariable String userId){
-        //TODO: if there's time, make is possible to set reservables to be visible to selected user only
-        //at the moment, all reservables are visible to everyone
-        List<Reservable> reservables = reservationItemRepository.getAll();
-        List<SerializableReservationItem> list = new ArrayList<>();
-        
-        for(Reservable item : reservables){
-            list.add(new SerializableReservationItem(item));
-        }
-        
-        return list;
-    }
-    
     private class SerializableReservation{
         public int id;
         public String user;
@@ -76,20 +61,5 @@ public class ReservationRESTController {
             this.reservableId = res.getReservationItem().getId();
         }
         
-    }
-    private class SerializableReservationItem{
-        public int id;
-        public String name;
-        public String info;
-        public String owner;
-        public int ownerId;
-        
-        public SerializableReservationItem(Reservable item){
-            this.id = item.getId();
-            this.name = item.getName();
-            this.info = item.getInfo();
-            this.owner = item.getOwner().getName();
-            this.ownerId= item.getOwner().getId();
-        }
     }
 }
