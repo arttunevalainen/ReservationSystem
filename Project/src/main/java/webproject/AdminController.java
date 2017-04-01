@@ -8,7 +8,7 @@ package webproject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import webproject.Models.Role;
+import webproject.Models.User;
 
 /**
  *
@@ -22,8 +22,10 @@ public class AdminController {
     public String adminSettings(Model model) {
         
         model.addAttribute("title", "Admin settings");
+        model.addAttribute("userName", User.getUserDetails().getUsername());
+        model.addAttribute("role", User.getUserRole());
         
-        if(Role.getRole().equals("admin")) {
+        if(User.getUserRole().equals("admin")) {
             return "adminsettings";
         }
         else {

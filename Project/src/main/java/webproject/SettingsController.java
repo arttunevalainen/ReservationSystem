@@ -37,8 +37,9 @@ public class SettingsController {
     @GetMapping("/settings")
     public String settings(Model model) {
      
-        model.addAttribute("userName", Role.getUserDetails().getUsername());
+        model.addAttribute("userName", User.getUserDetails().getUsername());
         model.addAttribute("title", "Settings");
+        model.addAttribute("role", User.getUserRole());
         
         return "settings";
     }
@@ -60,7 +61,7 @@ public class SettingsController {
             
             //TÄSSÄ KÄYTTÄJÄN ID HAKU KÄYTTÄJÄNIMELLÄ.
             
-            int userid = userRepository.getUserIDByUserName(Role.getUserDetails().getUsername());
+            int userid = userRepository.getUserIDByUserName(User.getUserDetails().getUsername());
             
             userRepository.changePassword(userid, password1);
             

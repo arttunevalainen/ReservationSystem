@@ -1,9 +1,6 @@
 
 package webproject;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,7 +50,7 @@ public class HomeController extends WebMvcConfigurerAdapter {
         
         
         //TÄSSÄ KÄYTTÄJÄN ID HAKU KÄYTTÄJÄNIMELLÄ.
-        int userid = userRepository.getUserIDByUserName(Role.getUserDetails().getUsername());
+        int userid = userRepository.getUserIDByUserName(User.getUserDetails().getUsername());
         
         
         User a = userRepository.get(userid);
@@ -61,10 +58,10 @@ public class HomeController extends WebMvcConfigurerAdapter {
                            .forEach(s -> System.out.println(s.getReserver().getName()));
         
         
-        model.addAttribute("userName", Role.getUserDetails().getUsername());
+        model.addAttribute("userName", User.getUserDetails().getUsername());
         model.addAttribute("title", "Home");
         model.addAttribute("userId", userid);
-        model.addAttribute("role", Role.getRole());
+        model.addAttribute("role", User.getUserRole());
         
         Reservable item = reservationItemRepository.get(1);
         model.addAttribute("reservationitem", item.getName());

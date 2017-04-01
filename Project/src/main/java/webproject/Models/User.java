@@ -1,6 +1,9 @@
 package webproject.Models;
 
 import java.util.Set;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 public class User{
@@ -104,5 +107,25 @@ public class User{
      */
     public void setReservations(Set<Reservation> reservations) {
         this.reservations = reservations;
+    }
+    
+    //Käyttäjän rooli saadaan täältä.
+    public static String getUserRole() {
+        
+        UserDetails details = User.getUserDetails();
+        
+        Object b[] = details.getAuthorities().toArray();
+        String role = b[0].toString();
+        
+        return role;
+    }
+    
+    public static UserDetails getUserDetails() {
+        
+        //Saadaan kaivettua kirjautunut
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails details = (UserDetails) auth.getPrincipal();
+        
+        return details;
     }
 }
