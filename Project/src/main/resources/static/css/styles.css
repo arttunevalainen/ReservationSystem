@@ -72,7 +72,8 @@ body{
     height:180px;
     margin-left: 10px;
     margin-right: 10px;
-    
+    overflow:hidden;
+    height:1%;
 }
 .reserved-item{
     display:block;
