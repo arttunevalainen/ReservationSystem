@@ -45,9 +45,13 @@ public class ReservationRESTController {
         return list;
     }
     
+    /**
+     * Gets all the reservations for a reservable
+     * @param reservableId
+     * @return 
+     */
     @RequestMapping("/reservables_reservations/{reservableId}")
     public List<ReservationEvent> reservablesReservations(@PathVariable String reservableId){
-        System.out.println("PErksles");
         Set<Reservation> reservations = reservableRepository.get(Integer.parseInt(reservableId)).getReservations();
         List<ReservationEvent> list = new ArrayList<>();
         

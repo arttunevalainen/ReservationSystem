@@ -19,13 +19,16 @@ public class HomeController extends WebMvcConfigurerAdapter {
     private final UserRepository userRepository;
     private final ReservableRepository reservationItemRepository;
     private final ReservationRepository reservationRepository;
+    private final AuthenticationUtils authenticationUtils;
     
     public HomeController(UserRepository userRepository,
                             ReservableRepository reservationItemRepository,
-                            ReservationRepository reservationRepository){
+                            ReservationRepository reservationRepository,
+                            AuthenticationUtils authenticationUtils){
         this.userRepository = userRepository;
         this.reservationItemRepository = reservationItemRepository;
         this.reservationRepository = reservationRepository;
+        this.authenticationUtils = authenticationUtils;
     }
 
     //Ohjataan käyttäjä kotisivulle josta kirjautumatta jättäneet menevät loginiin.
@@ -50,32 +53,23 @@ public class HomeController extends WebMvcConfigurerAdapter {
         
         
         //TÄSSÄ KÄYTTÄJÄN ID HAKU KÄYTTÄJÄNIMELLÄ.
-        int userid = userRepository.getUserIDByUserName(AuthenticationUtils.getUserDetails().getUsername());
-        
+        int userid = authenticationUtils.getUserId();
         
         User a = userRepository.get(userid);
-        a.getReservations().stream()
-                           .forEach(s -> System.out.println(s.getReserver().getName()));
         
-        
-        model.addAttribute("userName", AuthenticationUtils.getUserDetails().getUsername());
+        model.addAttribute("userName", authenticationUtils.getUserDetails().getUsername());
         model.addAttribute("title", "Home");
         model.addAttribute("userId", userid);
-        model.addAttribute("role", AuthenticationUtils.getUserRole());
+        model.addAttribute("role", authenticationUtils.getUserRole());
         
         Reservable item = reservationItemRepository.get(1);
         model.addAttribute("reservationitem", item.getName());
         model.addAttribute("ownername", item.getOwner().getName());
-     
-        item.getReservations().stream()
-                              .forEach(s -> System.out.println(s.getReserver().getName()));
         
         Reservation res = reservationRepository.get(userid);
         
         model.addAttribute("reservation_reservable", res.getReservationItem().getName());
         model.addAttribute("reservation_user", res.getReserver().getName());
-        
-        //userRepository.save(new User("uusi", "kayttaja", "jee", "user"));
         
         return "home";
     }

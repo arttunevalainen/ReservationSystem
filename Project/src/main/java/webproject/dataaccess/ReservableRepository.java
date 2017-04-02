@@ -4,7 +4,6 @@ package webproject.dataaccess;
 import java.util.List;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
-import org.postgresql.util.PSQLException;
 import org.springframework.stereotype.Component;
 import webproject.Application;
 import webproject.Models.Reservable;

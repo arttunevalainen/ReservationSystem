@@ -1,7 +1,9 @@
-userin roolin haku
 reservationin luonti
 
+
 etusivun muutos
+boilerplaten ja toistuvan koodin vähentäminen
+muutenkin roima refaktorointi
 
 Salasanojen hashaus
 hibernate annotaatiot

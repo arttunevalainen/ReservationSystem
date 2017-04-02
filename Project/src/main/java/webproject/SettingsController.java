@@ -22,17 +22,19 @@ import webproject.dataaccess.UserRepository;
 public class SettingsController {
     
     private final UserRepository userRepository;
+    private final AuthenticationUtils authenticationUtils;
     
-    public SettingsController(UserRepository userRepository){
+    public SettingsController(UserRepository userRepository, AuthenticationUtils authenticationUtils){
         this.userRepository = userRepository;
+        this.authenticationUtils = authenticationUtils;
     }
     
     @GetMapping("/settings")
     public String settings(Model model) {
      
-        model.addAttribute("userName", AuthenticationUtils.getUserDetails().getUsername());
+        model.addAttribute("userName", authenticationUtils.getUserDetails().getUsername());
         model.addAttribute("title", "Settings");
-        model.addAttribute("role", AuthenticationUtils.getUserRole());
+        model.addAttribute("role", authenticationUtils.getUserRole());
         
         return "settings";
     }
@@ -54,7 +56,7 @@ public class SettingsController {
             
             //TÄSSÄ KÄYTTÄJÄN ID HAKU KÄYTTÄJÄNIMELLÄ.
             
-            int userid = userRepository.getUserIDByUserName(AuthenticationUtils.getUserDetails().getUsername());
+            int userid = authenticationUtils.getUserId();
             
             userRepository.changePassword(userid, password1);
             

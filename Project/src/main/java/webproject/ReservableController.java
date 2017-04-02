@@ -1,6 +1,8 @@
 
 package webproject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import org.postgresql.util.PSQLException;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,9 @@ import webproject.dataaccess.ReservableRepository;
 import webproject.dataaccess.ReservationRepository;
 import webproject.dataaccess.UserRepository;
 
+/*
+TÄN VOI EHKÄ REFAKTOROIDA USEEMPAAN LUOKKAAN
+*/
 
 @Controller
 @RequestMapping("reservable")
@@ -25,12 +30,14 @@ public class ReservableController{
     private final ReservableRepository reservableRepository;
     private final UserRepository userRepository;
     private final ReservationRepository reservationRepository;
+    private final AuthenticationUtils authenticationUtils;
     
     public ReservableController(ReservableRepository reservableRepository, UserRepository userRepository,
-                                ReservationRepository reservationRepository){
+                                ReservationRepository reservationRepository, AuthenticationUtils authenticationUtils){
         this.reservableRepository = reservableRepository;
         this.userRepository = userRepository;
         this.reservationRepository = reservationRepository;
+        this.authenticationUtils = authenticationUtils;
     }
     
     @RequestMapping("/list")
@@ -40,8 +47,8 @@ public class ReservableController{
         model.addAttribute("reservables", res);
         model.addAttribute("title", "Reservations");
         
-        model.addAttribute("userName", AuthenticationUtils.getUserDetails().getUsername());
-        model.addAttribute("role", AuthenticationUtils.getUserRole());
+        model.addAttribute("userName", authenticationUtils.getUserDetails().getUsername());
+        model.addAttribute("role", authenticationUtils.getUserRole());
         
         return "reservable/list";
     }
@@ -53,8 +60,10 @@ public class ReservableController{
         model.addAttribute("reservations", res.getReservations());
         model.addAttribute("title", "Reservations");
         
-        model.addAttribute("userName", AuthenticationUtils.getUserDetails().getUsername());
-        model.addAttribute("role", AuthenticationUtils.getUserRole());
+        model.addAttribute("userName", authenticationUtils.getUserDetails().getUsername());
+        model.addAttribute("role", authenticationUtils.getUserRole());
+        
+        model.addAttribute("newReservation", new ReservationPostModel());
         
         model.addAttribute("reservableId", id);
         return "reservable/info";
@@ -66,8 +75,8 @@ public class ReservableController{
         model.addAttribute("title", "Reservations");
         model.addAttribute("newReservable", new ReservablePostModel());
         
-        model.addAttribute("userName", AuthenticationUtils.getUserDetails().getUsername());
-        model.addAttribute("role", AuthenticationUtils.getUserRole());
+        model.addAttribute("userName", authenticationUtils.getUserDetails().getUsername());
+        model.addAttribute("role", authenticationUtils.getUserRole());
         
         return "reservable/new";
     }
@@ -81,8 +90,7 @@ public class ReservableController{
         model.addAttribute("result", "New reservable was added succesfully");
         
         try{
-            //TODO: change this to current logged user
-            reservable.setOwner(userRepository.get(1));
+            reservable.setOwner(userRepository.get(authenticationUtils.getUserId()));
             
             reservableRepository.save(reservable);
         }
@@ -117,23 +125,23 @@ public class ReservableController{
     @PostMapping("/newreservation")
     public String newReservation(@ModelAttribute ReservationPostModel newRes, Model model) {
         
-        
         Reservation reservation = new Reservation();
-        reservation.setStartTime(null);
-        reservation.setEndTime(null);
+        
+        DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
         
         model.addAttribute("result", "New reservation was added succesfully");
         
         try{
-            //TODO: change this to current logged user
+            reservation.setStartTime(format.parse(newRes.getStartDate()));
+            reservation.setEndTime(format.parse(newRes.getEndDate()));
             reservation.setReservationItem(reservableRepository.get(newRes.getReservableId()));
-            reservation.setReserver(userRepository.get(1));
+            reservation.setReserver(userRepository.get(authenticationUtils.getUserId()));
             reservationRepository.save(reservation);
         }
         catch(Exception ex){
+            ex.printStackTrace();
             model.addAttribute("result", "Error while processing request");
         }
-        
         return "reservable/postback";
     }
     

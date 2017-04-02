@@ -20,7 +20,12 @@
         <div class='available-reservations' style='margin-top:10px;'>
             <div id='confirm-container' style='text-align: center;display:none;height:50px;'>
                 Do you want to make a reservation on date <span id='confirm-date'></span>?
-                <button id='confirm-button'></button>
+                <form action="#" th:action="@{/reservable/newreservation}" th:object="${newReservation}" method="post">
+                    <input id="start-date" type="hidden" th:field="*{startDate}" value=""/>
+                    <input id="end-date" type="hidden" th:field="*{endDate}" value=""/>
+                    <input type="hidden" name="reservableId" th:value="${reservableId}"/>
+                    <input type="submit" value="Submit" />
+                </form>
             </div>
             <div id='calendar'></div>
         </div>
@@ -29,7 +34,6 @@
 $(document).ready(function() {
     
     var reservableId =  /*[[${reservableId}]]*/ 0;
-    var resDate;
     
     $.ajax({
         url:"/reservationREST/reservables_reservations/" + reservableId,
@@ -42,12 +46,15 @@ $(document).ready(function() {
     $('#calendar').fullCalendar({
         dayClick:function(date, jsEvent, view){
             if(!dayHasEvents(date)){
-                resDate = date;
-                $('#confirm-date').html(moment(date).format('DD.MM.YYYY'));
+                var dateString = moment(date).format('DD.MM.YYYY');
+                $('#start-date').val(dateString);
+                $('#end-date').val(dateString);
+                $('#confirm-date').html(dateString);
                 $('#confirm-container').show();
  
             }else{
-                resDate = null;
+                $('#start-date').val("");
+                $('#end-date').val("");
                 $('#confirm-date').html("");
                 $('#confirm-container').hide();
             }

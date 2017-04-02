@@ -7,7 +7,8 @@ package webproject.Models;
  */
 public class ReservationPostModel {
     private int reservableId;
-    private String date;
+    private String startDate;
+    private String endDate;
 
     /**
      * @return the reservableId
@@ -24,17 +25,31 @@ public class ReservationPostModel {
     }
 
     /**
-     * @return the date
+     * @return the startDate
      */
-    public String getDate() {
-        return date;
+    public String getStartDate() {
+        return startDate;
     }
 
     /**
-     * @param date the date to set
+     * @param startDate the startDate to set
      */
-    public void setDate(String date) {
-        this.date = date;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    /**
+     * @return the endDate
+     */
+    public String getEndDate() {
+        return endDate;
+    }
+
+    /**
+     * @param endDate the endDate to set
+     */
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
 }

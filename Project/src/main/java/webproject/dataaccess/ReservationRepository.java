@@ -24,9 +24,12 @@ public class ReservationRepository {
     
     public void save(Reservation res){
         Session session = Application.sessionFactory.openSession();
-        Hibernate.initialize(res.getReservationItem());
-        Hibernate.initialize(res.getReserver());
+//        Hibernate.initialize(res.getReservationItem());
+//        Hibernate.initialize(res.getReserver());
+        Hibernate.initialize(res);
+        session.beginTransaction();
         session.save(res);
+        session.getTransaction().commit();
         session.close();
     }
 }
