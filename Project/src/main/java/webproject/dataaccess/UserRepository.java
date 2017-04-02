@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Component;
 import webproject.Application;
+import webproject.Models.Reservation;
 import webproject.Models.User;
 
 /**
@@ -30,6 +31,10 @@ public class UserRepository {
         Session session = Application.sessionFactory.openSession();
         User item = session.get(User.class, 1);
         Hibernate.initialize(item.getReservations());
+        for(Reservation res : item.getReservations()){
+            Hibernate.initialize(res.getReserver());
+            Hibernate.initialize(res.getReservationItem());
+        }
         session.close();
         return item;
     }

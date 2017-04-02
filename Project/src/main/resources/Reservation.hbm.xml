@@ -5,8 +5,8 @@
     <id column="Id" name="id">
       <generator class="increment"/>
     </id>
-    <one-to-one cascade="save-update" class="webproject.Models.User" foreign-key="reserverid" name="reserver"/>
-    <one-to-one cascade="save-update" class="webproject.Models.Reservable" foreign-key="reservableid" name="reservationItem"/>
+    <many-to-one class="webproject.Models.User" column="reserverid" name="reserver"/>
+    <many-to-one class="webproject.Models.Reservable" column="reservableid" name="reservationItem"/>
     <property column="starttime" name="startTime" type="timestamp"/>
     <property column="endtime" name="endTime" type="timestamp"/>
   </class>

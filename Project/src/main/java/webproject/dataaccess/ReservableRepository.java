@@ -30,6 +30,7 @@ public class ReservableRepository {
         Session session = Application.sessionFactory.openSession();
         Reservable item = session.get(Reservable.class, id);
         Hibernate.initialize(item.getReservations());
+        Hibernate.initialize(item.getOwner());
         session.close();
         return item;
     }
