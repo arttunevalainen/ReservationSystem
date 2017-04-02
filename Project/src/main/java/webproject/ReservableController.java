@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import webproject.Models.Reservable;
 import webproject.Models.ReservablePostModel;
 import webproject.Models.Reservation;
-import webproject.Models.User;
+import webproject.Models.ReservationPostModel;
 import webproject.dataaccess.ReservableRepository;
 import webproject.dataaccess.ReservationRepository;
 import webproject.dataaccess.UserRepository;
@@ -40,22 +40,21 @@ public class ReservableController{
         model.addAttribute("reservables", res);
         model.addAttribute("title", "Reservations");
         
-        model.addAttribute("userName", User.getUserDetails().getUsername());
-        model.addAttribute("role", User.getUserRole());
+        model.addAttribute("userName", AuthenticationUtils.getUserDetails().getUsername());
+        model.addAttribute("role", AuthenticationUtils.getUserRole());
         
         return "reservable/list";
     }
     
     @RequestMapping("/info/{id}")
     public String id(Model model, @PathVariable String id) {
-        //tsekkaa että userilla oikeudet nähdä tämä
         Reservable res = reservableRepository.get(Integer.parseInt(id));
         model.addAttribute("reservable", res);
         model.addAttribute("reservations", res.getReservations());
         model.addAttribute("title", "Reservations");
         
-        model.addAttribute("userName", User.getUserDetails().getUsername());
-        model.addAttribute("role", User.getUserRole());
+        model.addAttribute("userName", AuthenticationUtils.getUserDetails().getUsername());
+        model.addAttribute("role", AuthenticationUtils.getUserRole());
         
         model.addAttribute("reservableId", id);
         return "reservable/info";
@@ -67,8 +66,8 @@ public class ReservableController{
         model.addAttribute("title", "Reservations");
         model.addAttribute("newReservable", new ReservablePostModel());
         
-        model.addAttribute("userName", User.getUserDetails().getUsername());
-        model.addAttribute("role", User.getUserRole());
+        model.addAttribute("userName", AuthenticationUtils.getUserDetails().getUsername());
+        model.addAttribute("role", AuthenticationUtils.getUserRole());
         
         return "reservable/new";
     }
@@ -87,13 +86,12 @@ public class ReservableController{
             
             reservableRepository.save(reservable);
         }
-        catch(PSQLException ex){
+        catch(Exception ex){
             model.addAttribute("result", "Error while processing request");
         }
         
         return "reservable/postback";
     }
-    
     
     /**
      * Reservation page
@@ -108,6 +106,35 @@ public class ReservableController{
         model.addAttribute("reservation_title", res.getReservationItem().getName() + " at " + res.getStartTime().toString());
         
         return "reservation";
+    }
+    
+    /**
+     * Adds new reservation
+     * @param newRes
+     * @param model
+     * @return 
+     */
+    @PostMapping("/newreservation")
+    public String newReservation(@ModelAttribute ReservationPostModel newRes, Model model) {
+        
+        
+        Reservation reservation = new Reservation();
+        reservation.setStartTime(null);
+        reservation.setEndTime(null);
+        
+        model.addAttribute("result", "New reservation was added succesfully");
+        
+        try{
+            //TODO: change this to current logged user
+            reservation.setReservationItem(reservableRepository.get(newRes.getReservableId()));
+            reservation.setReserver(userRepository.get(1));
+            reservationRepository.save(reservation);
+        }
+        catch(Exception ex){
+            model.addAttribute("result", "Error while processing request");
+        }
+        
+        return "reservable/postback";
     }
     
     

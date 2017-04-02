@@ -14,14 +14,14 @@
 <body>
     <div th:replace="fragments :: header (title=${title}, role=${role})"></div>
     <div class='content'>
-        <h1 th:text="${reservable.name}">
-        </h1>
-        <div class="reservable-description" th:text="${reservable.info}">
-        </div>
-        <div id='reservation-confirmation'>
-            
-        </div>
-        <div class='available-reservations'>
+        <h1 th:text="${reservable.name}"></h1>
+        <div class="reservable-description" th:text="${reservable.info}"></div>
+        
+        <div class='available-reservations' style='margin-top:10px;'>
+            <div id='confirm-container' style='text-align: center;display:none;height:50px;'>
+                Do you want to make a reservation on date <span id='confirm-date'></span>?
+                <button id='confirm-button'></button>
+            </div>
             <div id='calendar'></div>
         </div>
     </div>
@@ -29,6 +29,7 @@
 $(document).ready(function() {
     
     var reservableId =  /*[[${reservableId}]]*/ 0;
+    var resDate;
     
     $.ajax({
         url:"/reservationREST/reservables_reservations/" + reservableId,
@@ -41,11 +42,19 @@ $(document).ready(function() {
     $('#calendar').fullCalendar({
         dayClick:function(date, jsEvent, view){
             if(!dayHasEvents(date)){
-                console.log("öaksjdlkasjd");
-                $('#reservation-confirmation').html(date);
+                resDate = date;
+                $('#confirm-date').html(moment(date).format('DD.MM.YYYY'));
+                $('#confirm-container').show();
+ 
+            }else{
+                resDate = null;
+                $('#confirm-date').html("");
+                $('#confirm-container').hide();
             }
         }
     });
+    
+    
     
     //Check if the day clicked already has an event
     function dayHasEvents(date){

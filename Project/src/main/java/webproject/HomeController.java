@@ -50,7 +50,7 @@ public class HomeController extends WebMvcConfigurerAdapter {
         
         
         //TÄSSÄ KÄYTTÄJÄN ID HAKU KÄYTTÄJÄNIMELLÄ.
-        int userid = userRepository.getUserIDByUserName(User.getUserDetails().getUsername());
+        int userid = userRepository.getUserIDByUserName(AuthenticationUtils.getUserDetails().getUsername());
         
         
         User a = userRepository.get(userid);
@@ -58,10 +58,10 @@ public class HomeController extends WebMvcConfigurerAdapter {
                            .forEach(s -> System.out.println(s.getReserver().getName()));
         
         
-        model.addAttribute("userName", User.getUserDetails().getUsername());
+        model.addAttribute("userName", AuthenticationUtils.getUserDetails().getUsername());
         model.addAttribute("title", "Home");
         model.addAttribute("userId", userid);
-        model.addAttribute("role", User.getUserRole());
+        model.addAttribute("role", AuthenticationUtils.getUserRole());
         
         Reservable item = reservationItemRepository.get(1);
         model.addAttribute("reservationitem", item.getName());

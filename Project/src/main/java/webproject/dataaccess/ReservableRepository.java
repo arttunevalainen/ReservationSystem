@@ -16,7 +16,7 @@ import webproject.Models.Reservable;
 @Component
 public class ReservableRepository {
     
-    public void save(Reservable reservable) throws PSQLException{
+    public void save(Reservable reservable) throws Exception{
         
         Session session = Application.sessionFactory.openSession();
         Hibernate.initialize(reservable);

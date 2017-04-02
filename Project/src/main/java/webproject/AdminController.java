@@ -22,10 +22,10 @@ public class AdminController {
     public String adminSettings(Model model) {
         
         model.addAttribute("title", "Admin settings");
-        model.addAttribute("userName", User.getUserDetails().getUsername());
-        model.addAttribute("role", User.getUserRole());
+        model.addAttribute("userName", AuthenticationUtils.getUserDetails().getUsername());
+        model.addAttribute("role", AuthenticationUtils.getUserRole());
         
-        if(User.getUserRole().equals("admin")) {
+        if(AuthenticationUtils.getUserRole().equals("admin")) {
             return "adminsettings";
         }
         else {

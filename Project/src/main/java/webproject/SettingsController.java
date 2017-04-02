@@ -6,18 +6,11 @@
 package webproject;
 
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import webproject.Models.Role;
 import webproject.Models.User;
 import webproject.dataaccess.UserRepository;
 
@@ -37,9 +30,9 @@ public class SettingsController {
     @GetMapping("/settings")
     public String settings(Model model) {
      
-        model.addAttribute("userName", User.getUserDetails().getUsername());
+        model.addAttribute("userName", AuthenticationUtils.getUserDetails().getUsername());
         model.addAttribute("title", "Settings");
-        model.addAttribute("role", User.getUserRole());
+        model.addAttribute("role", AuthenticationUtils.getUserRole());
         
         return "settings";
     }
@@ -61,7 +54,7 @@ public class SettingsController {
             
             //TÄSSÄ KÄYTTÄJÄN ID HAKU KÄYTTÄJÄNIMELLÄ.
             
-            int userid = userRepository.getUserIDByUserName(User.getUserDetails().getUsername());
+            int userid = userRepository.getUserIDByUserName(AuthenticationUtils.getUserDetails().getUsername());
             
             userRepository.changePassword(userid, password1);
             
