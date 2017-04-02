@@ -51,7 +51,6 @@ public class HomeController extends WebMvcConfigurerAdapter {
     @RequestMapping("/home")
     public String index(Model model) {
         
-        
         //TÄSSÄ KÄYTTÄJÄN ID HAKU KÄYTTÄJÄNIMELLÄ.
         int userid = authenticationUtils.getUserId();
         
@@ -61,16 +60,7 @@ public class HomeController extends WebMvcConfigurerAdapter {
         model.addAttribute("title", "Home");
         model.addAttribute("userId", userid);
         model.addAttribute("role", authenticationUtils.getUserRole());
-        
-        Reservable item = reservationItemRepository.get(1);
-        model.addAttribute("reservationitem", item.getName());
-        model.addAttribute("ownername", item.getOwner().getName());
-        
-        Reservation res = reservationRepository.get(userid);
-        
-        model.addAttribute("reservation_reservable", res.getReservationItem().getName());
-        model.addAttribute("reservation_user", res.getReserver().getName());
-        
+
         return "home";
     }
 }

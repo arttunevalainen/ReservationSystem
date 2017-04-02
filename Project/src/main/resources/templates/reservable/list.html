@@ -13,7 +13,7 @@
 
 <h1 style='display:inline-block'>Items available for reservation</h1>
         <!--        TODO: näytetään vain jos käyytäjällä on oikeus lisätä uusi-->
-        <div class='button' style="float:right;clear:left;">
+        <div class='button' style="float:right;clear:left;" th:if="${role == 'admin'}">
             <span><a href='/reservable/new'>Add new reservable</a></span>
         </div>
         

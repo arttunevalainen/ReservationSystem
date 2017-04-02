@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 import webproject.Application;
 import webproject.Models.Reservable;
+import webproject.Models.Reservation;
 
 /**
  *
@@ -31,6 +32,10 @@ public class ReservableRepository {
         Reservable item = session.get(Reservable.class, id);
         Hibernate.initialize(item.getReservations());
         Hibernate.initialize(item.getOwner());
+        for(Reservation res : item.getReservations()){
+            Hibernate.initialize(res.getReserver());
+            Hibernate.initialize(res.getReservationItem());
+        }
         session.close();
         return item;
     }

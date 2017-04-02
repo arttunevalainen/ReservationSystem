@@ -29,7 +29,7 @@ public class UserRepository {
     
     public User get(int id){
         Session session = Application.sessionFactory.openSession();
-        User item = session.get(User.class, 1);
+        User item = session.get(User.class, id);
         Hibernate.initialize(item.getReservations());
         for(Reservation res : item.getReservations()){
             Hibernate.initialize(res.getReserver());

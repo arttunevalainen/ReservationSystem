@@ -1,7 +1,10 @@
-reservationin luonti
 
+ownerin toiminnallisuus
+etusivun tyylit
+roolin tarkistus rajoitetuille sivuille
 
-etusivun muutos
+deploominen johonkin
+
 boilerplaten ja toistuvan koodin vähentäminen
 muutenkin roima refaktorointi
 

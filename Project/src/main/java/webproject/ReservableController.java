@@ -126,11 +126,8 @@ public class ReservableController{
     public String newReservation(@ModelAttribute ReservationPostModel newRes, Model model) {
         
         Reservation reservation = new Reservation();
-        
         DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-        
         model.addAttribute("result", "New reservation was added succesfully");
-        
         try{
             reservation.setStartTime(format.parse(newRes.getStartDate()));
             reservation.setEndTime(format.parse(newRes.getEndDate()));
