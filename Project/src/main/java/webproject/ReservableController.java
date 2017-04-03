@@ -4,7 +4,6 @@ package webproject;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import org.postgresql.util.PSQLException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;

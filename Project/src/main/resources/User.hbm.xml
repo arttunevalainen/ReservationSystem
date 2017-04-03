@@ -19,7 +19,6 @@
 			<key column="reserverid"/>
 			<one-to-many class="Reservation"/>
 		</set>
-
     </class>
 
 </hibernate-mapping>

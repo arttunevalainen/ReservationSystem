@@ -1,9 +1,6 @@
 package webproject.Models;
 
 import java.util.Set;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 
 
 public class User{
@@ -13,6 +10,7 @@ public class User{
     private String password;
     private String username;
     private Set<Reservation> reservations;
+    private Set<User> users;
     
     public User(){
         
@@ -108,4 +106,6 @@ public class User{
     public void setReservations(Set<Reservation> reservations) {
         this.reservations = reservations;
     }
+    
+    
 }
