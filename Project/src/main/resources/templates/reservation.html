@@ -14,7 +14,7 @@
             
         </h1>
         <!-- Tänne reservationin perumisnappula -->
-        <form class="deleteReservation" th:action="@{/reservation" method="post">
+        <form class="deleteReservation" th:action=" @{'~/reservation/' + ${resid}}" method="post">
             <button type="Submit">Delete reservation</button>
         </form>
     </div>

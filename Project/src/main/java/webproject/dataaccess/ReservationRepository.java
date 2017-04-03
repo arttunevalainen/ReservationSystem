@@ -32,4 +32,14 @@ public class ReservationRepository {
         session.getTransaction().commit();
         session.close();
     }
+    
+    public void delete(Reservation res) {
+        
+        Session session = Application.sessionFactory.openSession();
+        Hibernate.initialize(res);
+        session.beginTransaction();
+        session.delete(res);
+        session.getTransaction().commit();
+        session.close();
+    }
 }

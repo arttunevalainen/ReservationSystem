@@ -115,6 +115,7 @@ public class UserRepository {
                 session.delete(res);
             }
         }
+        
         session.getTransaction().commit();
         //delete user
         session.beginTransaction();

@@ -38,6 +38,7 @@ public class AdminController {
         model.addAttribute("title", "Admin settings");
         model.addAttribute("userName", authenticationUtils.getUserDetails().getUsername());
         model.addAttribute("role", authenticationUtils.getUserRole());
+        model.addAttribute("userId", authenticationUtils.getUserId());
         
         List<User> users = userRepository.getAll();
         deleteAdminsFromList(users);
