@@ -81,4 +81,34 @@ public class UserRepository {
             return false;
         }
     }
+    
+    public List<User> getAll() {
+        
+        Session session = Application.sessionFactory.openSession();
+        List<User> items = session.createCriteria(User.class).list();
+         
+        return items;
+    }
+    
+    public void deleteUser(int id) {
+        Session session = Application.sessionFactory.openSession();
+        
+        
+        session.beginTransaction();
+        User a = get(id);
+        
+        for(Reservation r:a.getReservations()){
+            session.delete(r);
+        }
+        //a.setReservations(null);
+        
+        session.delete(a);
+        session.getTransaction().commit();
+        /*
+        Query query = session.createQuery("delete from User u where u.id= :id");
+        query.setParameter("id", id);
+        query.executeUpdate();*/
+        
+        session.close();
+    }
 }

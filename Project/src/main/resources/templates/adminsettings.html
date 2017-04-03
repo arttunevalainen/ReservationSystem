@@ -15,7 +15,25 @@ and open the template in the editor.
     </head>
     
     <body>
-        <div th:replace="fragments :: header (title=${title}, role=${role})"></div>
-        
+        <div class='content'>
+            <div th:replace="fragments :: header (title=${title}, role=${role})"></div>
+            <span th:text="${accountDeletionSuccess}"></span>
+            
+            <div class="reservable-list" style='clear:right;'>
+                <div class="basic-container reservable" th:each="users : ${users}">
+                    
+                    <div class='basic-header userdetails'>
+                        Username: <span th:text="${users.username}"></span>
+                    </div>
+                    Role: <span th:text="${users.role}"></span>
+                    User real name: <span class="reservable-info" th:text="${users.name}"></span>
+                    
+                    <a th:href="@{'~/adminsettings/' + ${users.id}}" style="float:right;clear:left;" th:if="${role == 'admin'}">Delete</a>
+                    <!--<form method="POST" th:action="@{/adminsettings}" style="float:right;clear:left;" th:if="${role == 'admin'}">
+                        <button type="Submit">Delete</button>
+                    </form>-->
+                </div>
+            </div>
+        </div>
     </body>
 </html>
