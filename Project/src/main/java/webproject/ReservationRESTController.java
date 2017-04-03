@@ -68,15 +68,15 @@ public class ReservationRESTController {
         public int userId;
         public String reservable;
         public int reservableId;
-        public Date startTime;
+        public String startTime;
         public Date endTime;
         
         public SerializableReservation(Reservation res){
             this.id = res.getId();
             this.user = res.getReserver().getName();
             this.reservable = res.getReservationItem().getName();
-            this.startTime = res.getStartTime();
-            this.endTime = res.getEndTime();
+             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            this.startTime = df.format(res.getStartTime());
             this.userId = res.getReserver().getId();
             this.reservableId = res.getReservationItem().getId();
         }

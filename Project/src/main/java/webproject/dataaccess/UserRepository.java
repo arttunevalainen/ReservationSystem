@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Component;
 import webproject.Application;
+import webproject.Models.Reservable;
 import webproject.Models.Reservation;
 import webproject.Models.User;
 
@@ -18,6 +19,12 @@ import webproject.Models.User;
  */
 @Component
 public class UserRepository {
+    
+    private final ReservableRepository reservableRepository;
+    
+    public UserRepository(ReservableRepository reservableRepository){
+        this.reservableRepository = reservableRepository;
+    }
 
     public void save(User user){
         Session session = Application.sessionFactory.openSession();
@@ -94,15 +101,25 @@ public class UserRepository {
         Session session = Application.sessionFactory.openSession();
         
         
+        User user = get(id);
+        //delete reservations
         session.beginTransaction();
-        User a = get(id);
-        
-        for(Reservation r:a.getReservations()){
+        for(Reservation r:user.getReservations()){
             session.delete(r);
         }
-        //a.setReservations(null);
-        
-        session.delete(a);
+        session.getTransaction().commit();
+        //delete reservables
+        session.beginTransaction();
+        for(Reservable res:reservableRepository.getAll()){
+            if(res.getOwner().getId() == user.getId()){
+                session.delete(res);
+            }
+        }
+        session.getTransaction().commit();
+        //delete user
+        session.beginTransaction();
+        user.setReservations(null);
+        session.delete(user);
         session.getTransaction().commit();
         /*
         Query query = session.createQuery("delete from User u where u.id= :id");

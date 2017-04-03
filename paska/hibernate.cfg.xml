@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM 
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+   <session-factory>
+   <property name="hibernate.dialect">
+      org.hibernate.dialect.PostgreSQLDialect
+   </property>
+   <property name="hibernate.connection.driver_class">
+      org.postgresql.Driver
+   </property>
+<!-- jdbc:postgresql://localhost:5433/ReservationTool -->
+   <property name="hibernate.connection.url">
+		jdbc:postgresql://ec2-54-225-242-74.compute-1.amazonaws.com:5432/d812l5iu9dcunj?sslmode=require&amp;username=kcsnlvucxiefpo&amp;password=17c718966bb21ec702fa3adcb279dcd150c4a73af94416ecc0a60176437545d9&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory
+      
+   </property>
+   <!--  postgres -->
+   <property name="hibernate.connection.username">
+   kcsnlvucxiefpo
+     
+   </property>
+   <!-- dev -->
+   <property name="hibernate.connection.password">
+   17c718966bb21ec702fa3adcb279dcd150c4a73af94416ecc0a60176437545d9
+      
+	</property>
+	<property name="hibernate.jdbc.use_get_generated_keys">true</property>
+	<property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
+
+   <!-- List of XML mapping files -->
+   <mapping resource="User.hbm.xml"/>
+   <mapping resource="Reservation.hbm.xml"/>
+   <mapping resource="ReservationItem.hbm.xml"/>
+
+</session-factory>
+</hibernate-configuration>
