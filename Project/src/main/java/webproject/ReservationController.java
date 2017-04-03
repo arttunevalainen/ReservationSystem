@@ -1,19 +1,4 @@
 
-
-/*
-
-
-POISTETAAN TÄÄ JOS TÄNNE EI TUU MITÄÄN TOIMINTAA
-
-
-
-*/
-
-
-
-
-
-
 package webproject;
 
 import org.springframework.stereotype.Controller;
@@ -49,15 +34,19 @@ public class ReservationController {
     
     @PostMapping("/reservation/{id}")
     public String deleteReservation(Model model, @PathVariable String id) {
-        //DELETE
-        
-        
+        System.out.println(id);
         Reservation res = reservationRepository.get(Integer.parseInt(id));
+        
+        int userId = authenticationUtils.getUserId();
+        if(userId != res.getReserver().getId()){
+            return "home";
+        }
+        
         reservationRepository.delete(res);
         
         model.addAttribute("userName", authenticationUtils.getUserDetails().getUsername());
         model.addAttribute("title", "Home");
-        model.addAttribute("userId", authenticationUtils.getUserId());
+        model.addAttribute("userId", userId);
         model.addAttribute("role", authenticationUtils.getUserRole());
         
         return "home";

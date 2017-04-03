@@ -106,6 +106,7 @@ public class ReservableController{
      * @param id
      * @return 
      */
+    //TODO: this can probably be removed
     @RequestMapping("/reservation/{id}")
     public String reservation(Model model, @PathVariable String id) {
         Reservation res = reservationRepository.get(Integer.parseInt(id));

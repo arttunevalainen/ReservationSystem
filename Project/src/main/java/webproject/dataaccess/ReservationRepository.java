@@ -16,7 +16,7 @@ public class ReservationRepository {
     
     public Reservation get(int id){
         Session session = Application.sessionFactory.openSession();
-        Reservation item = session.get(Reservation.class, 1);
+        Reservation item = session.get(Reservation.class, id);
         Hibernate.initialize(item.getReserver());
         Hibernate.initialize(item.getReservationItem());
         session.close();
