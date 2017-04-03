@@ -9,6 +9,7 @@
 
 </head>
 <body>
+    <h1>Reservation system</h1>
     <span th:text="${accountCreationSuccess}"></span>
     <span th:if="${param.error}">Username or password is incorrect</span>
     <span th:if="${param.logout}">You have logged out!</span>
@@ -37,6 +38,10 @@
             </table>
             <p>Or would you like to <a href='signup'>sign up now?</a></p>
         </form>
+    </div>
+    
+    <div>
+        <p>Here you can reserve items that other people are offering for renting</p>
     </div>
 		
 </body>
